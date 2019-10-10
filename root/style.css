@@ -1,0 +1,155 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+    padding: 20px;
+    border-bottom: 1px solid #cccccc;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.logo-total {
+    width: 100;
+    height: 40px;
+}
+
+.user-informations {
+    display: grid;
+    justify-content: right;
+    align-items: center;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px;
+}
+
+.user-informations button {
+    background-color: white;
+    color: #DF0C36;
+    font-size: 12px;
+    padding: 0px;
+    text-decoration: underline;
+}
+
+.user-informations h1 {
+    font-size: 16px;
+    color: #7D7064;
+    font-weight: 500;
+}
+
+.users-table {
+    width: 100%;
+    display: grid;
+    padding-top: 20px;
+    /* background-color: #DB7E04;*/
+}
+
+.search-bar {
+    padding: 20px;
+    padding-left: 0px;
+}
+
+.search-bar input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #cccccc;
+    width: 50%;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: #004196;
+}
+
+button {
+    background-color: #DF0C36;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.users-table-header {
+    padding: 20px;
+    border-bottom: 1px solid #cccccc;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.users-table-content {
+    background-color: #eeeeee;
+}
+
+.user {
+    margin: 20px;
+    background-color: #eeeeee;
+    padding: 20px;
+    background-color: white;
+}
+
+.user .informations {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 10px;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #004196;
+    font-weight: bold;
+}
+
+.form-group input,
+select {
+    border: none;
+}
+
+.users-table-content {
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+.btn-icon {
+    background: linear-gradient(#eeeeee, #cccccc);
+    color: #777777;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.user-creating {
+    box-shadow: 10px 10px 20px #cccccc;
+}
+
+.cancel-create,
+.create-user-button {
+    display: none;
+}
+
+.user-creating .cancel-create {
+    display: inline-block;
+}
+
+.user-creating .create-user-button {
+    display: inline-block;
+}
+
+.small-button {
+    padding: 4px;
+    color: #7D7064;
+    font-size: 10px;
+    text-align: center;
+    border-radius: 2px;
+    background-color: #eeeeee;
+}

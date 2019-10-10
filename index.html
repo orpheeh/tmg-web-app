@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Total Marketing Gabon</title>
+</head>
+
+<body>
+
+    <h1>Loading ...</h1>
+
+    <script type="module">
+        import { hasToken, getRole } from "./common/session.js"; import { ROOT, TMG, GERANT } from "./common/role.js"; if(hasToken()){ const role = getRole(); if(role == ROOT){ window.location = "./root/index.html"; } else if(role == TMG) { window.location =
+        "./tmg/index.html"; } else if(role == GERANT){ window.location = "./gerant/index.html"; } } else { window.location = "./login/index.html"; }
+    </script>
+</body>
+
+</html>

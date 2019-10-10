@@ -1,0 +1,103 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+    padding: 20px;
+    border-bottom: 1px solid #cccccc;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.logo-total {
+    width: 100;
+    height: 40px;
+}
+
+.user-informations {
+    display: grid;
+    justify-content: right;
+    align-items: center;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px;
+}
+
+.user-informations button {
+    background-color: white;
+    color: #DF0C36;
+    font-size: 12px;
+    padding: 0px;
+    text-decoration: underline;
+    border: none;
+}
+
+button {
+    background-color: #004196;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.user-informations h1 {
+    font-size: 16px;
+    color: #7D7064;
+    font-weight: 500;
+}
+
+.main-container h1 {
+    color: #DF0C36;
+    padding: 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.main-container {
+    padding: 40px;
+}
+
+.wiki {
+    padding: 20px;
+    box-shadow: 2px 5px 10px #eeeeee;
+    margin: 20px 0px;
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 10px;
+}
+
+.create-wiki {
+    padding: 20px;
+    margin: 20px 0px;
+    box-shadow: 2px 5px 20px #cccccc;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.form-group label {
+    color: #004196;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    border: none;
+    padding: 20px;
+}
+
+.simple-button {
+    font-size: 16px;
+    padding: 10px;
+    background-color: #eeeeee;
+    color: #7D7064;
+    margin: 10px;
+}
