@@ -1,0 +1,14 @@
+.wm-list {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    gap: 20px;
+    padding: 25px;
+}
+
+.wiki-table {
+    padding: 40px;
+}
+
+input {
+    padding: 10px;
+}

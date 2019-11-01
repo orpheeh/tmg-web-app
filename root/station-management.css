@@ -1,0 +1,60 @@
+.station-list {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    column-gap: 20px;
+    row-gap: 20px;
+    padding: 20px;
+    overflow-y: scroll;
+    height: 80vh;
+}
+
+#add-station-button {
+    text-decoration: none;
+    background-color: #ffffff;
+    color: #777777;
+    display: grid;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 5px 20px #cccccc;
+    transition: 0.4s;
+}
+
+#add-station-button:hover {
+    transform: scale(1.05);
+}
+
+.station {
+    padding: 10px;
+    background-color: #ffffff;
+    height: 200px;
+    display: grid;
+    grid-template-rows: 30% 50% auto auto;
+    box-shadow: 10px 5px 20px #cccccc;
+}
+
+.station button {
+    color: #777777;
+    background-color: transparent;
+    font-size: 10px;
+    transition: 0.4s;
+}
+
+.station button:hover {
+    transform: scale(1.5);
+}
+
+.station-name {
+    color: #DF0C36;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    border: none;
+    width: 100%;
+}
+
+.station .station-gerant {
+    font-size: 11px;
+    color: #777777;
+    border: none;
+}

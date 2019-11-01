@@ -1,0 +1,98 @@
+.sd-name {
+    padding-left: 40px;
+    color: #DF0C36;
+    font-size: 16px;
+    text-align: right;
+}
+
+.sd-gerant-name {
+    padding-left: 40px;
+    text-align: right;
+}
+
+.sd-year {
+    color: #777777;
+    font-size: 40px;
+    padding-left: 40px;
+    text-align: right;
+}
+
+.sdom-name {
+    padding-left: 40px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.sd-update {
+    background-color: transparent;
+    text-decoration: underline;
+    font-size: 12px;
+    color: #777777;
+}
+
+.sdom-objectifs {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20%;
+    column-gap: 1%;
+    row-gap: 20px;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.sdo {
+    color: white;
+}
+
+.sdo-name {
+    font-size: 14px;
+    font-weight: 100;
+    padding: 10px;
+    letter-spacing: 1px;
+}
+
+.sdo-value {
+    font-size: 16px;
+    text-align: center;
+    font-weight: 100;
+    padding: 20px;
+    width: 100%;
+    background-color: transparent;
+}
+
+.charts {
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 48% 48%;
+    gap: 20px;
+}
+
+.sdor-value {
+    font-size: 11px;
+}
+
+.sdo-result {
+    background-color: rgba(255, 255, 255, 0.411);
+    color: black;
+    padding: 10px;
+}
+
+.sdo {
+    background-color: #cccccc;
+}
+
+.station-main-content {
+    display: grid;
+    grid-template-columns: 10% 85%;
+    column-gap: 20px;
+    justify-content: center;
+}
+
+@media screen and (max-width: 800px) {
+    .sdom-objectifs {
+        grid-template-columns: auto;
+    }
+    .station-main-content {
+        grid-template-columns: auto;
+        row-gap: 20px;
+    }
+}

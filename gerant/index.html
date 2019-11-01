@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../common/common-wiki.css">
+    <link rel="stylesheet" href="../common/common-messagerie.css">
+
+    <link rel="stylesheet" href="./home-style.css">
+    <link rel="stylesheet" href="../common/common.css">
+    <link rel="stylesheet" href="../common/common-msg-responsive.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../fonts/helvetica.css">
+    <!-- Home station style-->
+    <link rel="stylesheet" href="station.css">
+    <link rel="stylesheet" href="station-responsive.css">
+    <title>Total Marketing Gabon | GERANT</title>
+</head>
+
+<body>
+    <header>
+        <h1 class="logo-title">Total Marketing Gabon</h1>
+        <div class="user-informations">
+            <h2 id="display-fn"></h2>
+            <i id="down" class="material-icons">person</i>
+            <h1 class="initial">ON</h1>
+            <img src="../images/station.jpg" class="down" alt="la photo de
+                    profile" id="photo">
+            <div class="dropdown-menu">
+                <div class="personal">
+                    <h1 id="load-photo" class="initial">ON</h1>
+                    <div class="personal-data">
+                        <p class="fullname">Nve Hounkponou Orphée</p>
+                        <p class="username">nveorphee</p>
+                    </div>
+                    <div class="file-form-group-2">
+                        <label for="chphoto">Modifier la photo</label>
+                        <input type="file" id="chphoto" />
+                    </div>
+                </div>
+                <button>Changer le mot de passe</button>
+                <button id="sign-out">Se déconnecter</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="nav-bar">
+            <a href="#" class="nav-bar-item home-item selected-item">Accueil</a>
+            <a href="#" class="nav-bar-item message-item">Messagerie</a>
+            <a href="#" class="nav-bar-item wiki-station-item">Wiki</a>
+        </div>
+
+        <div class="content accueil-content selected-item">
+            <div class="informations-station">
+                <h1>Informations de la station service</h1>
+
+                <div class="inforations-table">
+                    <div class="it-item">
+                        <h2>Nom de la station</h2>
+                        <h3 class="st-name">lorem</h3>
+                    </div>
+                    <div class="it-item">
+                        <h2>Contact service client</h2>
+                        <h3 class="st-contact">ipsu</h3>
+                    </div>
+                    <div class="it-item">
+                        <h2>Situation géographique</h2>
+                        <h3 class="st-geo">dolor</h3>
+                    </div>
+                    <div class="it-item">
+                        <h2>Ville</h2>
+                        <h3 class="st-ville">sit</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="objectifs-station">
+                <h1>Objectif de la station service</h1>
+                <div class="last-result">
+                    <div class="lr-header">
+                        <div></div>
+                        <h2>Objectif</h2>
+                        <h2>Réalisé</h2>
+                        <h2>Indicateur</h2>
+                    </div>
+
+                    <div class="obj-content">
+                        <div class="obj">
+                            <h3>Carburant</h3>
+                            <h3>1</h3>
+                            <h3>1</h3>
+                            <span></span>
+                        </div>
+                        <div class="obj">
+                            <h3>Lubrifiant</h3>
+                            <h3>1</h3>
+                            <h3>1</h3>
+                            <span></span>
+                        </div>
+                        <div class="obj">
+                            <h3>SFS</h3>
+                            <h3>1</h3>
+                            <h3>1</h3>
+                            <span></span>
+                        </div>
+                        <div class="obj">
+                            <h3>GPL</h3>
+                            <h3>1</h3>
+                            <h3>1</h3>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="histo-objectif">
+                    <div class="ho-header">
+                        <button><i class="material-icons">keyboard_arrow_left</i></button>
+                        <button><i class="material-icons">keyboard_arrow_right</i></button>
+                        <div class="ho-month">
+                            <h3>Oct</h3>
+                            <h3>Nov</h3>
+                            <h3>Dec</h3>
+                        </div>
+                    </div>
+
+                    <div class="ho-content">
+                        <div class="ho">
+                            <h3>Carburant</h3>
+                            <h3>1</h3>
+                            <h3>2</h3>
+                            <h3>3</h3>
+                        </div>
+                        <div class="ho">
+                            <h3>Lubrifiant</h3>
+                            <h3>1</h3>
+                            <h3>2</h3>
+                            <h3>3</h3>
+                        </div>
+                        <div class="ho">
+                            <h3>SFS</h3>
+                            <h3>1</h3>
+                            <h3>2</h3>
+                            <h3>3</h3>
+                        </div>
+                        <div class="ho">
+                            <h3>GPL</h3>
+                            <h3>1</h3>
+                            <h3>2</h3>
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content messagerie-content">
+            <div class="cols">
+                <div class="col col-1">
+                    <button id="new-message-button"><i
+                                class="material-icons">create</i><span>Nouveau
+                                message</span></button>
+                    <div class="msg-nav-bar">
+                        <a href="#" class="msg-nav-item msg-item-receives
+                                msg-selected"><i class="material-icons">all_inbox</i><span>Message
+                                    reçu</span></a>
+                        <a href="#" class="msg-nav-item msg-item-send"><i
+                                    class="material-icons">send</i><span>Message
+                                    envoyé</span></a>
+                    </div>
+                </div>
+                <div class="col col-2">
+
+                </div>
+                <div class="col col-3" id="read-message">
+                </div>
+
+                <div class="modal create-message-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="file-form-group">
+                                <label for="add-attachment-msg"><i
+                                            class="material-icons">attach_file</i>Fichier</label>
+                                <input type="file" id="add-attachment-msg">
+                            </div>
+                            <div class="white-space"></div>
+                            <button id="send-message" class="modal-menu-item"><i
+                                        class="material-icons">send</i>Envoyer</button>
+                            <button id="cancel-message" class="modal-menu-item"><i
+                                        class="material-icons">clear</i>Annuler</button>
+                        </div>
+
+                        <div class="modal-main-content
+                                create-message-container">
+                            <div class="w-msg-h">
+                                <span>A: </span>
+                                <select class="gerant-list">
+                                    </select>
+                                <button class="add-gerant button-icon" title="Ajouter ce gerant"><i
+                                            class="material-icons">person_add</i></button>
+                                <button class="add-all-gerant button-icon" title="Ajouter tous les gérants"><i
+                                            class="material-icons">group_add</i></button>
+                            </div>
+                            <div class="dst-list">
+
+                            </div>
+                            <div class="attachment-list">
+
+                            </div>
+                            <span>Objet</span>
+                            <input type="text" id="message-objet" placeholder="Ici...">
+                            <textarea id="the-message" cols="30" rows="10" placeholder="Ecrivez votre message ici"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content wiki-content">
+        </div>
+    </div>
+
+    <script src="./script.js" type="module"></script>
+</body>
+
+</html>

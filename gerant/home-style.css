@@ -1,0 +1,83 @@
+.accueil-content {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    gap: 25px;
+    padding: 20px;
+}
+
+.accueil-content h1 {
+    color: #DF0C36;
+    font-size: 18px;
+    text-transform: uppercase;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.it-item {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: start;
+    padding: 10px;
+}
+
+.it-item:nth-child(odd) {
+    background-color: #cccccc;
+}
+
+.it-item:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+.it-item h2 {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.it-item h3 {
+    font-size: 16px;
+}
+
+.lr-header {
+    background-color: #DF0C36;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.obj {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.lr-header * {
+    font-size: 14px;
+    color: white;
+    padding: 14px;
+}
+
+.ho-header {
+    display: grid;
+    grid-template-columns: 10% 10% 80%;
+    background-color: #DF0C36;
+    margin-top: 20px;
+}
+
+.ho-header button {
+    background-color: transparent;
+}
+
+.ho-header div {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    align-items: center;
+    justify-items: center;
+}
+
+.ho-header div * {
+    color: white;
+    font-size: 14px;
+}
+
+.ho {
+    display: grid;
+    grid-template-columns: 20% 26% 26% 26%;
+}

@@ -1,8 +1,9 @@
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+body {
+    background: #ffffff no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 input {
@@ -49,18 +50,26 @@ button:hover {
 }
 
 .login-form {
-    width: 100vw;
+    width: 50vw;
     display: grid;
-    grid-template-columns: 30%;
+    grid-template-columns: auto;
     grid-gap: 20px;
     align-items: center;
     justify-content: center;
     padding: 20px;
+    background: linear-gradient(#ffffff54, #ffffff);
+}
+
+.main-content {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
 }
 
 header {
-    border-bottom: 1px solid #cccccc;
     padding: 20px;
+    background-color: white;
 }
 
 .logo-total {
@@ -73,10 +82,13 @@ header {
     text-align: center;
     font-size: 20px;
     font-weight: 500;
+    color: black;
+    margin-top: 20px;
 }
 
 @media screen and (max-width: 800px) {
     .login-form {
         grid-template-columns: 100%;
+        width: 100vw;
     }
 }

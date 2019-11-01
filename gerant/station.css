@@ -1,0 +1,62 @@
+.sd-name {
+    padding-left: 40px;
+    color: #DF0C36;
+}
+
+.sd-gerant-name {
+    padding-left: 40px;
+    padding-bottom: 40px;
+}
+
+.sdom-objectifs {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    column-gap: 1%;
+    row-gap: 20px;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.sdo {
+    color: white;
+}
+
+.sdo-name {
+    font-size: 14px;
+    font-weight: 100;
+    padding: 10px;
+    letter-spacing: 1px;
+}
+
+.sdo-value {
+    font-size: 24px;
+    text-align: center;
+    font-weight: 100;
+    padding: 20px;
+}
+
+.sdor-value {
+    font-size: 11px;
+}
+
+.sdo-result {
+    background-color: rgba(255, 255, 255, 0.411);
+    color: black;
+    padding: 10px;
+}
+
+.sdo.carburant {
+    background-color: #2F7BB4;
+}
+
+.sdo.lubrifiant {
+    background-color: #DB7E04;
+}
+
+.sdo.sfs {
+    background-color: #7D7064;
+}
+
+.sdo.gpl {
+    background-color: #278903;
+}

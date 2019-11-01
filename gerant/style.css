@@ -1,0 +1,48 @@
+.content {
+    display: none;
+}
+
+.selected-item {
+    display: block;
+}
+
+.wiki-content.selected-item {
+    display: grid;
+}
+
+.nav-bar {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 50%;
+    justify-content: start;
+    column-gap: 40px;
+    padding: 20px;
+    position: sticky;
+}
+
+.nav-bar-item {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #777777;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.nav-bar-item.selected-item {
+    border-bottom: 4px solid #DF0C36;
+}
+
+.file-form-group-2 input {
+    display: none;
+}
+
+.file-form-group-2 label {
+    font-size: 12px;
+    color: #777777;
+    padding: 5px;
+}
+
+.file-form-group-2 label:hover {
+    cursor: pointer;
+}

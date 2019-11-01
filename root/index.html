@@ -5,32 +5,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./user-management.css">
+    <link rel="stylesheet" href="./wiki-management.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./station-management.css">
+    <link rel="stylesheet" href="../fonts/helvetica.css">
+    <link rel="stylesheet" href="../common/common.css">
     <title>Total Marketing Gabon | ROOT</title>
 </head>
 
 <body>
     <header>
-        <img class="logo-total" src="https://upload.wikimedia.org/wikipedia/fr/d/dd/TOTAL_SA_logo.svg" alt="Logo Total">
+        <h1 class="logo-title">Total Marketing Gabon</h1>
         <div class="user-informations">
-            <h1><i class="fa fa-user"></i> root</h1>
-            <button><i class="fa fa-unlock-alt"></i> changer le mot de passe</button>
-            <button id="sign-out"><i class="fa fa-sign-out-alt"></i> se déconnecter</button>
+            <h2 id="display-fn">Bienvenue, root</h2>
+            <i id="down" class="material-icons">person</i>
+            <div class="dropdown-menu">
+                <button>Changer le mot de passe</button>
+                <button id="sign-out">Se déconnecter</button>
+            </div>
         </div>
     </header>
 
-    <div class="users-table">
-
-        <div class="users-table-header">
-            <div class="search-bar">
-                <input type="text" id="search-bar-input" placeholder="Rechercher un utilisateur">
-            </div>
-            <button id="add-user-button"><i class="fa fa-user-plus"></i>    Ajouter un utilisitateur</button>
-            <button id="actualize-users-list"><i class="fa fa-redo-alt"></i>    Recharger</button>
+    <div class="main-container">
+        <div class="nav-bar">
+            <a href="#" class="nav-bar-item" id="user-management-item">Utilisateurs</a>
+            <a href="#" class="nav-bar-item" id="station-management-item">Stations</a>
+            <a href="#" class="nav-bar-item" id="wiki-management-item">Wiki</a>
         </div>
 
-        <div class="users-table-content">
+        <div class="main-content">
+
+            <!-- User manangement -->
+            <div class="main-content-item users-table">
+
+                <div class="users-table-header">
+                    <div class="search-bar">
+                        <input type="text" id="search-bar-input" placeholder="Rechercher un utilisateur">
+                    </div>
+                    <button id="add-user-button"><i class="material-icons">person_add</i>Ajouter
+                            un utilisitateur</button>
+                    <button id="actualize-users-list"><i
+                                class="material-icons">refresh</i> Recharger</button>
+                </div>
+
+                <div class="users-table-content">
+
+                </div>
+            </div>
+
+            <!-- Station management -->
+            <div class="main-content-item station-table">
+                <div class="station-list">
+                    <a href="#" id="add-station-button">Ajouter une station</a>
+                </div>
+
+                <div class="modal objectif-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="modal-menu-item save-obj"><i class="material-icons">save</i>Enregistrer</button>
+                            <button class="modal-menu-item cancel-obj"><i class="material-icons">clear</i>Annuler</button>
+                        </div>
+                        <div class="modal-main-content">
+                            <p class="modal-obj-station"></p>
+                            <div class="form-group">
+                                <label for="carburant">Carburant (Tonnes)</label>
+                                <input type="number" id="carburant">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lubrifiant">Lubrifiant (Tonnes)</label>
+                                <input type="number" id="lubrifiant">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sfs">SFS (Chiffre d' affaire)</label>
+                                <input type="number" id="sfs">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gpl">GPL</label>
+                                <input type="text" id="gpl">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wiki -->
+            <div class="main-content-item wiki-table">
+                <div class="wm-header">
+                    <input id="input-nom-cat" type="text" placeholder="Nom de la categorie">
+                    <button id="create-wiki-cat">Ajouter</button>
+                </div>
+
+                <div class="wm-list">
+
+                </div>
+            </div>
 
         </div>
     </div>

@@ -32,7 +32,12 @@ function login(username, password) {
         }
     }).then(data => {
         if (data !== null && data !== undefined) {
-            onLoginSuccess(data);
+            saveToken(data.token, data.user.nom, data.user.prenom, data.user.role, data.user._id, data.user.username, data.user.photo);
+            if (password === "changemoi") {
+                window.location = "../change_password/index.html";
+            } else {
+                onLoginSuccess(data);
+            }
         }
     });
 }
@@ -48,7 +53,6 @@ function onLoginError(status) {
 }
 
 function onLoginSuccess(data) {
-    saveToken(data.token, data.user.nom, data.user.prenom, data.user.role);
     let location = "../root/index.html";
 
     if (data.user.role === TMG) {

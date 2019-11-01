@@ -10,7 +10,7 @@
 
 <body>
 
-    <h1>Loading ...</h1>
+    <h1>Chargement 0...</h1>
 
     <script type="module">
         import { hasToken, getRole } from "./common/session.js"; import { ROOT, TMG, GERANT } from "./common/role.js"; if(hasToken()){ const role = getRole(); if(role == ROOT){ window.location = "./root/index.html"; } else if(role == TMG) { window.location =

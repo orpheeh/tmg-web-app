@@ -1,0 +1,66 @@
+.wiki-cat {
+    box-shadow: 5px 10px 20px #cccccc;
+}
+
+.wiki-cat-name {
+    font-size: 14px;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.wiki {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 8px;
+    align-items: center;
+}
+
+.wiki-cat-header {
+    background-color: #DF0C36;
+}
+
+.wiki-cat-header * {
+    color: #ffffff;
+}
+
+.wiki a {
+    color: #004196;
+    font-weight: bold;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+    font-size: 12px;
+    row-gap: 20px;
+    font-weight: normal;
+}
+
+.wiki p {
+    font-size: 11px;
+    text-align: center;
+    color: #7D7064;
+}
+
+.wiki-content {
+    grid-template-columns: 45% 45%;
+    gap: 10%;
+    padding: 40px;
+}
+
+.wiki-cat-container {
+    height: 250px;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    row-gap: 30px;
+    padding: 20px;
+}
+
+@media screen and (max-width: 800px) {
+    .wiki-content {
+        grid-template-columns: auto;
+    }
+}

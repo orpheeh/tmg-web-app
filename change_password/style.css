@@ -1,0 +1,19 @@
+h1 {
+    padding: 20px;
+}
+
+.form-group {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 50%;
+}
+
+.form-group input {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+}
+
+button {
+    margin: 20px;
+}
