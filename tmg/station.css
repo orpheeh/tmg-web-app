@@ -1,64 +1,3 @@
-.sd-name {
-    padding-left: 40px;
-    color: #DF0C36;
-    font-size: 16px;
-    text-align: right;
-}
-
-.sd-gerant-name {
-    padding-left: 40px;
-    text-align: right;
-}
-
-.sd-year {
-    color: #777777;
-    font-size: 40px;
-    padding-left: 40px;
-    text-align: right;
-}
-
-.sdom-name {
-    padding-left: 40px;
-    font-size: 16px;
-    text-align: center;
-}
-
-.sd-update {
-    background-color: transparent;
-    text-decoration: underline;
-    font-size: 12px;
-    color: #777777;
-}
-
-.sdom-objectifs {
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20%;
-    column-gap: 1%;
-    row-gap: 20px;
-    justify-content: center;
-    padding-top: 20px;
-}
-
-.sdo {
-    color: white;
-}
-
-.sdo-name {
-    font-size: 14px;
-    font-weight: 100;
-    padding: 10px;
-    letter-spacing: 1px;
-}
-
-.sdo-value {
-    font-size: 16px;
-    text-align: center;
-    font-weight: 100;
-    padding: 20px;
-    width: 100%;
-    background-color: transparent;
-}
-
 .charts {
     padding-top: 20px;
     display: grid;
@@ -66,33 +5,87 @@
     gap: 20px;
 }
 
-.sdor-value {
-    font-size: 11px;
+.station-name-a:hover {
+    cursor: pointer;
+    color: #DF0C36;
 }
 
-.sdo-result {
-    background-color: rgba(255, 255, 255, 0.411);
-    color: black;
+.station-name-a {
     padding: 10px;
-}
-
-.sdo {
-    background-color: #cccccc;
 }
 
 .station-main-content {
     display: grid;
-    grid-template-columns: 10% 85%;
-    column-gap: 20px;
-    justify-content: center;
+    grid-template-columns: 20vw 75vw;
+    column-gap: 4vw;
+}
+
+.station-details-content {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    gap: 40px;
+}
+
+.station-details input {
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+}
+
+.station-details .form-group {
+    padding: 10px;
+}
+
+#update-station {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.station-details-element {
+    box-shadow: -1px 2px 10px #cccccc;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.station-details h2 {
+    font-size: 14px;
+    margin-top: 20px;
+    /*color: #004196;*/
+    border-bottom: 1px solid #cccccc;
+}
+
+.station-details h1 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.objectifs-container,
+.current-objectif {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.form-container {
+    display: grid;
+    grid-template-columns: auto auto;
 }
 
 @media screen and (max-width: 800px) {
-    .sdom-objectifs {
+    .station-details-content {
+        grid-template-columns: 100%;
+    }
+    .station-details {
         grid-template-columns: auto;
     }
     .station-main-content {
         grid-template-columns: auto;
-        row-gap: 20px;
+    }
+    .objectifs-container,
+    .current-objectif {
+        display: grid;
+        grid-template-columns: auto;
+    }
+    .form-container {
+        display: grid;
+        grid-template-columns: auto;
     }
 }

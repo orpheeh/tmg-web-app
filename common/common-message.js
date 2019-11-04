@@ -1,11 +1,12 @@
 import { GERANT, TMG } from '../../common/role.js';
 import { IP } from '../../common/tmg-web-service.js';
 import { getToken } from '../../common/session.js';
+import { userGerant } from './messagerie/messageData.js';
 
 let _attachments = [];
-let gerants = [];
+export let gerants = [];
 let _myMessages = [];
-let _tmg = [];
+export let _tmg = [];
 
 export function addAttachmentMsg(file) {
     _attachments.push(file);
@@ -70,7 +71,6 @@ export function addDst() {
     const select = document.querySelector('.gerant-list');
     const value = select.value;
     const inner = select.querySelector('option[value="' + value + '"]').innerHTML;
-
     addDstFrom(inner, value);
 }
 
@@ -81,13 +81,11 @@ export function addAllDst() {
 
 function addDstFrom(inner, value) {
     const dstList = document.querySelector('.dst-list');
-
     const template = `<div class="dst">
         <h1 class="dst-name">${inner}</h1>
         <span class="remove-dst">&times;</span>
         <p class="dst-id">${value}</p>
     </div>`;
-
     const dst = new DOMParser().parseFromString(template, 'text/html');
     const element = dst.querySelector('.dst');
     element.querySelector('.remove-dst').addEventListener('click', () => {
@@ -174,12 +172,15 @@ export function sendMessage(destinataires = []) {
     const objet = document.getElementById('message-objet').value;
     const content = document.getElementById('the-message').value;
 
-    if (destinataires = []) {
+    console.log("send message");
+    console.log(destinataires);
+    if (destinataires == [] || destinataires.length === 0) {
         const dstDocuments = document.querySelectorAll('.dst');
         dstDocuments.forEach(dst => {
             destinataires.push(dst.querySelector('.dst-id').innerHTML);
         });
     }
+    console.log(destinataires);
     const token = getToken();
     const formData = new FormData();
     console.log(_attachments);
@@ -271,7 +272,7 @@ function displayMessageDetails(objet, content, date, attachments, source) {
         <h2 class="msg-src">${source}</h2>
         <h5 class="msg-date">${normalizeDate(date)}</h5>
         <h1 class="msg-objet">${objet}</h1>
-        <p class="msg-content">${content}</p>
+        <textarea class="msg-content" rows="10" cols="100">${content}</textarea>
         <div class="msg-a-list">
         </div>
     </div>

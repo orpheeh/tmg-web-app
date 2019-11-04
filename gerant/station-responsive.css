@@ -1,5 +1,6 @@
 @media screen and (max-width: 800px) {
-    .sdom-objectifs {
-        grid-template-columns: 80%;
+    .accueil-content {
+        display: grid;
+        grid-template-columns: auto;
     }
 }

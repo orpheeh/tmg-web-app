@@ -1,4 +1,5 @@
-import { removeToken, getNom, getPrenom, getUsername } from "../common/session.js";
+import { removeToken, getNom, getPrenom, getUsername, getToken } from "../common/session.js";
+import { IP } from "../common/tmg-web-service.js";
 import {
     loadAllCategorie
 } from "./wiki/wiki.js";
@@ -14,7 +15,9 @@ import {
     displaySendMessage,
     displayReceiveMessage
 } from "../common/common-message.js";
-import { loadAllStation } from "./station.js";
+import { loadAllStation, updateStationConfig } from "./station.js";
+import { loadAllActu } from "../common/loading.js";
+
 
 window.addEventListener('load', () => {
 
@@ -38,9 +41,17 @@ window.addEventListener('load', () => {
     document.querySelector('.home-item').addEventListener('click', () => changeMenuItem(0));
     document.querySelector('.message-item').addEventListener('click', () => changeMenuItem(1));
     document.querySelector('.wiki-station-item').addEventListener('click', () => changeMenuItem(2));
-
+    document.querySelector('.actu-item').addEventListener('click', () => changeMenuItem(3));
     wiki();
     messagerie();
+    actu();
+    updateStationConfig();
+
+    document.getElementById('publish-actu').addEventListener('click', () => {
+        const title = document.querySelector('.actu-title').value;
+        const details = document.querySelector('.actu-details').value;
+        publishActu(title, details);
+    })
 });
 
 
@@ -85,5 +96,79 @@ function messagerie() {
         document.querySelector('.msg-item-receives').classList.remove('msg-selected');
         document.querySelector('.msg-item-send').classList.add('msg-selected');
         displaySendMessage();
+    });
+}
+
+function actu() {
+    const container = document.getElementById("actu-container");
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+    loadAllActu((data) => {
+        data.actus.forEach(a => {
+            displayActu(a.title, a.details, a.date, a._id);
+        });
+    });
+
+    document.querySelector('.actu-form-header').addEventListener('click', () => {
+        document.querySelector('.actu-form-content').classList.toggle('hide-form');
+    });
+}
+
+function displayActu(title, details, date, id) {
+    const container = document.getElementById("actu-container");
+
+    const template = `
+        <div class="actu">
+            <h1>${title}</h1>
+            <h3>${date.toString()}</h3>
+            <h2>${details}</h2>
+            <button class="delete-actu">supprimer</button>
+        </div>
+    `;
+    const element = new DOMParser().parseFromString(template, 'text/html').querySelector('.actu');
+    element.querySelector('.delete-actu').addEventListener('click', () => {
+        deleteActu(id);
+    })
+    container.appendChild(element);
+}
+
+function deleteActu(id) {
+    const token = getToken();
+    fetch(IP + '/tmg/actu/' + id, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            'authorization': 'Bearer ' + token
+        },
+    }).then(response => {
+        if (response.status === 200) {
+            actu();
+        }
+    })
+}
+
+function publishActu(title, details) {
+    const token = getToken();
+    fetch(IP + '/tmg/actu/publish', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            title,
+            details
+        })
+    }).then(response => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            alert('Error ' + response.status);
+        }
+    }).then(data => {
+        if (data !== undefined) {
+            actu();
+        }
     });
 }

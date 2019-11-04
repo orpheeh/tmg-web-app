@@ -1,14 +1,3 @@
-.create-wiki {
-    padding: 20px;
-    margin: 20px 0px;
-    box-shadow: 2px 5px 20px #777777;
-    display: none;
-}
-
-.show-create-wiki {
-    display: block;
-}
-
 .form-group {
     display: grid;
     grid-template-columns: auto;
@@ -21,7 +10,6 @@
 
 .form-group textarea,
 input {
-    border: none;
     padding: 10px;
 }
 
@@ -76,7 +64,7 @@ input {
 
 .nav-bar {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
     width: 50%;
     justify-content: start;
     column-gap: 40px;
@@ -94,4 +82,16 @@ input {
 
 .nav-bar-item.selected-item {
     border-bottom: 4px solid #DF0C36;
+}
+
+@media screen and (max-width: 800px) {
+    .nav-bar {
+        grid-template-columns: 100%;
+    }
+    .nav-bar {
+        width: 100%;
+    }
+    .nav-bar-item {
+        background-color: #eeeeee;
+    }
 }

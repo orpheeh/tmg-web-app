@@ -1,4 +1,4 @@
-import { IP } from "../common/tmg-web-service.js";
+import { loadAllActu } from "../common/loading.js"
 import { removeToken, getNom, getPrenom, getUsername, getPhoto, hasPhoto, setPhoto } from "../common/session.js";
 import {
     addAttachmentMsg,
@@ -18,6 +18,7 @@ window.addEventListener('load', () => {
     messagerie();
     wiki();
     loadMyStation();
+    actu();
 
     //Load initial
     const initial = document.querySelectorAll('.initial');
@@ -41,6 +42,7 @@ window.addEventListener('load', () => {
     document.querySelector('.home-item').addEventListener('click', () => changeMenuItem(0));
     document.querySelector('.message-item').addEventListener('click', () => changeMenuItem(1));
     document.querySelector('.wiki-station-item').addEventListener('click', () => changeMenuItem(2));
+    document.querySelector('.actu-item').addEventListener('click', () => changeMenuItem(3));
 
     //Change photo
     document.getElementById('chphoto').addEventListener('change', (e) => {
@@ -65,7 +67,6 @@ function changeMenuItem(index) {
     const contents = document.querySelectorAll('.content');
     contents.forEach(item => item.classList.remove('selected-item'));
 
-    console.log(contents);
     navItems[index].classList.add('selected-item');
     contents[index].classList.add('selected-item');
 }
@@ -104,4 +105,30 @@ function messagerie() {
 
 function wiki() {
     loadAllCategorie();
+}
+
+function actu() {
+    const container = document.getElementById("actu-container");
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+    loadAllActu((data) => {
+        data.actus.forEach(a => {
+            displayActu(a.title, a.details, a.date, a._id);
+        });
+    });
+}
+
+function displayActu(title, details, date, id) {
+    const container = document.getElementById("actu-container");
+
+    const template = `
+        <div class="actu">
+            <h1>${title}</h1>
+            <h3>${date.toString()}</h3>
+            <h2>${details}</h2>
+        </div>
+    `;
+    const element = new DOMParser().parseFromString(template, 'text/html').querySelector('.actu');
+    container.appendChild(element);
 }

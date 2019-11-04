@@ -232,3 +232,9 @@
     font-size: 10px;
     color: #004196;
 }
+
+.msg-content {
+    width: 100%;
+    border: none;
+    padding: 10px;
+}

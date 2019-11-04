@@ -1,5 +1,5 @@
 body {
-    background: #ffffff no-repeat center center fixed;
+    background: url(../images/station.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -57,7 +57,7 @@ button:hover {
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: linear-gradient(#ffffff54, #ffffff);
+    background-color: #ffffff;
 }
 
 .main-content {
@@ -83,6 +83,7 @@ header {
     font-size: 20px;
     font-weight: 500;
     color: black;
+    background-color: white;
     margin-top: 20px;
 }
 

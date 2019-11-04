@@ -24,8 +24,7 @@
 <body>
 
     <header>
-        <h1 class="logo-title">Total Marketing Gabon</h1>
-
+        <img src="../images/logo.png" alt="" class="logo-total">
         <div class="user-informations">
             <h2 id="display-fn"></h2>
             <h1 id="down" class="initial">ON</h1>
@@ -48,14 +47,108 @@
             <a href="#" class="nav-bar-item home-item selected-item">Accueil</a>
             <a href="#" class="nav-bar-item message-item">Messagerie</a>
             <a href="#" class="nav-bar-item wiki-station-item">Wiki</a>
+            <a href="#" class="nav-bar-item actu-item">Actualité</a>
         </div>
 
         <div class="content accueil-content selected-item">
             <div class="station-main-content">
                 <div class="station-list">
                 </div>
-                <div class="station-details">
 
+                <div class="station-details">
+                    <div class="station-details-content">
+                        <div class="station-details-element">
+                            <h1>Informations générales sur la station</h1>
+                            <div class="form-container">
+                                <div class="form-group">
+                                    <label>Nom de la station</label>
+                                    <input type="text" id="st-name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ville</label>
+                                    <input type="text" id="st-ville">
+                                </div>
+                                <div class="form-group">
+                                    <label>Lieu precis</label>
+                                    <input type="text" id="st-lieu">
+                                </div>
+                                <div class="form-group">
+                                    <label>Service client</label>
+                                    <input type="text" id="st-contact">
+                                </div>
+                                <div class="form-group">
+                                    <label>Gérant</label>
+                                    <select id="st-gerant-list">
+                                            <option value="none">Aucun gérant</option>
+                                        </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="station-details-element">
+                            <h1>Objectifs de la station service</h1>
+                            <div class="objectifs-container">
+                                <div class="form-group">
+                                    <label>Carburant <span>(Tonne)</span></label>
+                                    <input type="number" id="obj-carburant">
+                                </div>
+                                <div class="form-group">
+                                    <label>Lubrifiant <span>(Tonne)</span></label>
+                                    <input type="number" id="obj-lubrifiant">
+                                </div>
+                                <div class="form-group">
+                                    <label>SFS <span>(FCFA)</span></label>
+                                    <input type="number" id="obj-sfs">
+                                </div>
+                                <div class="form-group">
+                                    <label>GPL <span>(Tonne)</span></label>
+                                    <input type="number" id="obj-gpl">
+                                </div>
+                            </div>
+
+                            <h2>Resultat du mois en cours</h2>
+                            <div class="current-objectif">
+                                <div class="form-group">
+                                    <label>Carburant <span>(Tonne)</span></label>
+                                    <input type="number" id="val-carburant">
+                                </div>
+                                <div class="form-group">
+                                    <label>Lubrifiant <span>(Tonne)</span></label>
+                                    <input type="number" id="val-lubrifiant">
+                                </div>
+                                <div class="form-group">
+                                    <label>SFS <span>(FCFA)</span></label>
+                                    <input type="number" id="val-sfs">
+                                </div>
+                                <div class="form-group">
+                                    <label>GPL <span>(Tonne)</span></label>
+                                    <input type="number" id="val-gpl">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="station-details-element">
+                            <h1>Top Service</h1>
+                            <div class="form-container">
+                                <div class="form-group">
+                                    <label>Indicateur filiale</label>
+                                    <input type="number" id="indicateur-filiale">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Indicateur top service de la station</label>
+                                    <input type="number" id="top-service">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Objectif top service</label>
+                                    <input type="number" id="obj-top-service">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="update-station">Enregistrer les modifications</button>
                 </div>
             </div>
         </div>
@@ -63,11 +156,16 @@
         <div class="content messagerie-content">
             <div class="cols">
                 <div class="col col-1">
-                    <button id="new-message-button"><i class="material-icons">create</i> <span> Nouveau message</span></button>
+                    <button id="new-message-button"><i
+                                class="material-icons">create</i> <span> Nouveau
+                                message</span></button>
                     <div class="msg-nav-bar">
                         <a href="#" class="msg-nav-item msg-item-receives
-                                msg-selected"><i class="material-icons">all_inbox</i> <span> Message reçu</span></a>
-                        <a href="#" class="msg-nav-item msg-item-send"><i class="material-icons">send</i> <span>Message envoyé</span></a>
+                                msg-selected"><i class="material-icons">all_inbox</i>
+                                <span> Message reçu</span></a>
+                        <a href="#" class="msg-nav-item msg-item-send"><i
+                                    class="material-icons">send</i> <span>Message
+                                    envoyé</span></a>
                     </div>
                 </div>
                 <div class="col col-2">
@@ -80,21 +178,27 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <div class="file-form-group">
-                                <label for="add-attachment-msg"><i class="material-icons">attach_file</i>Fichier</label>
+                                <label for="add-attachment-msg"><i
+                                            class="material-icons">attach_file</i>Fichier</label>
                                 <input type="file" id="add-attachment-msg">
                             </div>
                             <div class="white-space"></div>
-                            <button id="send-message" class="modal-menu-item"><i class="material-icons">send</i>Envoyer</button>
-                            <button id="cancel-message" class="modal-menu-item"><i class="material-icons">clear</i>Annuler</button>
+                            <button id="send-message" class="modal-menu-item"><i
+                                        class="material-icons">send</i>Envoyer</button>
+                            <button id="cancel-message" class="modal-menu-item"><i
+                                        class="material-icons">clear</i>Annuler</button>
                         </div>
 
-                        <div class="modal-main-content create-message-container">
+                        <div class="modal-main-content
+                                create-message-container">
                             <div class="w-msg-h">
                                 <span>A: </span>
                                 <select class="gerant-list">
-                                </select>
-                                <button class="add-gerant button-icon" title="Ajouter ce gerant"><i class="material-icons">person_add</i></button>
-                                <button class="add-all-gerant button-icon" title="Ajouter tous les gérants"><i class="material-icons">group_add</i></button>
+                                    </select>
+                                <button class="add-gerant button-icon" title="Ajouter ce gerant"><i
+                                            class="material-icons">person_add</i></button>
+                                <button class="add-all-gerant button-icon" title="Ajouter tous les gérants"><i
+                                            class="material-icons">group_add</i></button>
                             </div>
                             <div class="dst-list">
 
@@ -115,6 +219,28 @@
 
         </div>
 
+    </div>
+
+    <div class="content actu-content">
+        <div id="actu-container">
+
+        </div>
+
+        <div class="actu-form">
+            <p class="actu-form-header">Nouvelle actualité</p>
+            <div class="actu-form-content">
+                <div class="form-group">
+                    <label>Titre</label>
+                    <input type="text" class="actu-title" , placeholder="Ecrivez le titre ici...">
+                </div>
+                <div class="form-group">
+                    <label>Details</label>
+                    <textarea type="text" cols="10" rows="3" class="actu-details" placeholder="Placeez le contenu
+                            ici..."></textarea>
+                </div>
+                <button id="publish-actu">Publier</button>
+            </div>
+        </div>
     </div>
 
     <script src="./script.js" type="module"></script>

@@ -180,3 +180,82 @@ h1.logo-title {
     font-size: 14px;
     padding-bottom: 10px;
 }
+
+#actu-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 20px;
+    padding: 20px;
+}
+
+.actu h1 {
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 8px;
+    color: #004196;
+}
+
+.actu h2 {
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.actu-form {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width: 30vw;
+    box-shadow: 10px 20px 20px #777777;
+    background-color: white;
+}
+
+.actu h3 {
+    font-size: 12px;
+    font-weight: 100;
+    color: #777777;
+    margin-bottom: 10px;
+}
+
+.actu button {
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.actu-form-content.hide-form {
+    display: none;
+}
+
+.actu-form p:hover {
+    cursor: pointer;
+}
+
+.actu-form * {
+    padding: 10px;
+}
+
+.actu-form button {
+    margin: 20px;
+    padding: auto;
+}
+
+.actu-form-header {
+    background-color: #004196;
+    color: white;
+}
+
+.wiki-content {
+    height: auto;
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 800px) {
+    .actu-form {
+        left: 5vw;
+        width: 90vw;
+        box-shadow: 1px -1px 10px #cccccc;
+    }
+    #actu-container {
+        grid-template-columns: auto;
+        row-gap: 40px;
+    }
+}

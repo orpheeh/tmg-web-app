@@ -17,12 +17,21 @@
     <!-- Home station style-->
     <link rel="stylesheet" href="station.css">
     <link rel="stylesheet" href="station-responsive.css">
+    <style>
+        .content {
+            display: none;
+        }
+        
+        .content.selected-item {
+            display: grid;
+        }
+    </style>
     <title>Total Marketing Gabon | GERANT</title>
 </head>
 
 <body>
     <header>
-        <h1 class="logo-title">Total Marketing Gabon</h1>
+        <img src="../images/logo.png" alt="Le logo de total" class="logo-total">
         <div class="user-informations">
             <h2 id="display-fn"></h2>
             <i id="down" class="material-icons">person</i>
@@ -52,28 +61,36 @@
             <a href="#" class="nav-bar-item home-item selected-item">Accueil</a>
             <a href="#" class="nav-bar-item message-item">Messagerie</a>
             <a href="#" class="nav-bar-item wiki-station-item">Wiki</a>
+            <a href="#" class="nav-bar-item actu-item">Actualité</a>
         </div>
 
         <div class="content accueil-content selected-item">
+
+            <div class="top-service">
+                <h2 id="indicateur-fil">Indicateur filiale: - </h2>
+                <h2 id="top-service">Indicateur de votre station: - </h2>
+                <h2 id="obj-top-service">Objectif top service: - </h2>
+            </div>
+            <div></div>
             <div class="informations-station">
                 <h1>Informations de la station service</h1>
 
                 <div class="inforations-table">
                     <div class="it-item">
                         <h2>Nom de la station</h2>
-                        <h3 class="st-name">lorem</h3>
+                        <h3 class="st-name"></h3>
                     </div>
                     <div class="it-item">
                         <h2>Contact service client</h2>
-                        <h3 class="st-contact">ipsu</h3>
+                        <h3 class="st-contact"></h3>
                     </div>
                     <div class="it-item">
                         <h2>Situation géographique</h2>
-                        <h3 class="st-geo">dolor</h3>
+                        <h3 class="st-lieu"></h3>
                     </div>
                     <div class="it-item">
                         <h2>Ville</h2>
-                        <h3 class="st-ville">sit</h3>
+                        <h3 class="st-ville"></h3>
                     </div>
                 </div>
             </div>
@@ -82,7 +99,7 @@
                 <h1>Objectif de la station service</h1>
                 <div class="last-result">
                     <div class="lr-header">
-                        <div></div>
+                        <h2 class="current-month">-</h2>
                         <h2>Objectif</h2>
                         <h2>Réalisé</h2>
                         <h2>Indicateur</h2>
@@ -91,27 +108,28 @@
                     <div class="obj-content">
                         <div class="obj">
                             <h3>Carburant</h3>
-                            <h3>1</h3>
-                            <h3>1</h3>
+                            <h3 class="obj-carburant">1</h3>
+                            <h3 class="val-carburant">0</h3>
+                            <h3 class="ind-carburant"></h3>
                             <span></span>
                         </div>
                         <div class="obj">
                             <h3>Lubrifiant</h3>
-                            <h3>1</h3>
-                            <h3>1</h3>
-                            <span></span>
+                            <h3 class="obj-lubrifiant">1</h3>
+                            <h3 class="val-lubrifiant">1</h3>
+                            <h3 class="ind-lubrifiant"></h3>
                         </div>
                         <div class="obj">
                             <h3>SFS</h3>
-                            <h3>1</h3>
-                            <h3>1</h3>
-                            <span></span>
+                            <h3 class="obj-sfs">1</h3>
+                            <h3 class="val-sfs">1</h3>
+                            <h3 class="ind-sfs"></h3>
                         </div>
                         <div class="obj">
                             <h3>GPL</h3>
-                            <h3>1</h3>
-                            <h3>1</h3>
-                            <span></span>
+                            <h3 class="obj-gpl">1</h3>
+                            <h3 class="val-gpl">1</h3>
+                            <h3 class="ind-gpl"></h3>
                         </div>
                     </div>
                 </div>
@@ -121,36 +139,36 @@
                         <button><i class="material-icons">keyboard_arrow_left</i></button>
                         <button><i class="material-icons">keyboard_arrow_right</i></button>
                         <div class="ho-month">
-                            <h3>Oct</h3>
-                            <h3>Nov</h3>
-                            <h3>Dec</h3>
+                            <h3 class="month-1">-</h3>
+                            <h3 class="month-2">-</h3>
+                            <h3 class="month-3">-</h3>
                         </div>
                     </div>
 
                     <div class="ho-content">
                         <div class="ho">
                             <h3>Carburant</h3>
-                            <h3>1</h3>
-                            <h3>2</h3>
-                            <h3>3</h3>
+                            <h3 class="month-carburant-1">-</h3>
+                            <h3 class="month-carburant-2">-</h3>
+                            <h3 class="month-carburant-3">-</h3>
                         </div>
                         <div class="ho">
                             <h3>Lubrifiant</h3>
-                            <h3>1</h3>
-                            <h3>2</h3>
-                            <h3>3</h3>
+                            <h3 class="month-lubrifiant-1">-</h3>
+                            <h3 class="month-lubrifiant-2">-</h3>
+                            <h3 class="month-lubrifiant-3">-</h3>
                         </div>
                         <div class="ho">
                             <h3>SFS</h3>
-                            <h3>1</h3>
-                            <h3>2</h3>
-                            <h3>3</h3>
+                            <h3 class="month-sfs-1">-</h3>
+                            <h3 class="month-sfs-2">-</h3>
+                            <h3 class="month-sfs-3">-</h3>
                         </div>
                         <div class="ho">
                             <h3>GPL</h3>
-                            <h3>1</h3>
-                            <h3>2</h3>
-                            <h3>3</h3>
+                            <h3 class="month-gpl-1">-</h3>
+                            <h3 class="month-gpl-2">-</h3>
+                            <h3 class="month-gpl-3">-</h3>
                         </div>
                     </div>
                 </div>
@@ -161,20 +179,17 @@
             <div class="cols">
                 <div class="col col-1">
                     <button id="new-message-button"><i
-                                class="material-icons">create</i><span>Nouveau
-                                message</span></button>
+                                class="material-icons">create</i><span>Nouveau message</span></button>
                     <div class="msg-nav-bar">
                         <a href="#" class="msg-nav-item msg-item-receives
-                                msg-selected"><i class="material-icons">all_inbox</i><span>Message
-                                    reçu</span></a>
-                        <a href="#" class="msg-nav-item msg-item-send"><i
-                                    class="material-icons">send</i><span>Message
-                                    envoyé</span></a>
+                                msg-selected"><i class="material-icons">all_inbox</i><span>Message reçu</span></a>
+                        <a href="#" class="msg-nav-item msg-item-send"><i class="material-icons">send</i><span>Message envoyé</span></a>
                     </div>
                 </div>
-                <div class="col col-2">
 
+                <div class="col col-2">
                 </div>
+
                 <div class="col col-3" id="read-message">
                 </div>
 
@@ -187,10 +202,8 @@
                                 <input type="file" id="add-attachment-msg">
                             </div>
                             <div class="white-space"></div>
-                            <button id="send-message" class="modal-menu-item"><i
-                                        class="material-icons">send</i>Envoyer</button>
-                            <button id="cancel-message" class="modal-menu-item"><i
-                                        class="material-icons">clear</i>Annuler</button>
+                            <button id="send-message" class="modal-menu-item"><i class="material-icons">send</i>Envoyer</button>
+                            <button id="cancel-message" class="modal-menu-item"><i class="material-icons">clear</i>Annuler</button>
                         </div>
 
                         <div class="modal-main-content
@@ -220,6 +233,12 @@
         </div>
 
         <div class="content wiki-content">
+        </div>
+
+        <div class="content actu-content">
+            <div id="actu-container">
+
+            </div>
         </div>
     </div>
 

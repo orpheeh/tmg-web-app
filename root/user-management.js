@@ -118,8 +118,8 @@ export function loadAllUser() {
                 </div>
 
                 <div class="actions">
-                    <button class="small-button update-user"> <i class="material-icons">edit</i></button>
-                    <button class="small-button delete-user"> <i class="material-icons">delete</i></button>
+                    <button title="enregistrer les modifications" class="small-button update-user"> <i class="material-icons">edit</i></button>
+                    <button title="supprimer le compte de l' utilisateur" class="small-button delete-user"> <i class="material-icons">delete</i></button>
                 </div>
 
             </div>

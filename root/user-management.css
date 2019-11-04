@@ -92,6 +92,12 @@ select {
     color: #777777;
 }
 
+.small-button i {
+    font-size: 16px;
+    background-color: transparent;
+    color: #004196;
+}
+
 button:hover {
     cursor: pointer;
 }

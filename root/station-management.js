@@ -99,16 +99,22 @@ export function loadAllStation() {
                     const objButton = data.objectifs.length == 0 ? `<button class="add-objectif-station" title="ajouter un objectif"><i class="material-icons">add</i></button>` : "";
                     const template = `
                             <div class="station">
-                                <div class="actions">
-                                    <button class="update-station" title="Enregistrer la modification"><i class="material-icons">edit</i></button>
-                                    <button class="delete-station" title="Supprimer la station"><i class="material-icons">delete</i></button>
-                                    ${objButton}
-                                    </div>
-                                <div class="station-informations">
+                                <i class="material-icons">ev_station</i>
+                                <div class="form-group">
+                                    <label>Nom de la station</label>
                                     <input type="text" class="station-name" value="Nouvelle station" />
                                 </div>
-                                <label>Responsable siège</label>
-                                <select class="station-tmg"></select>
+
+                                <div class="form-group">
+                                    <label>Responsable siège</label>
+                                    <select class="station-tmg"></select>
+                                </div>
+
+                                <div class="actions">
+                                <button class="update-station" title="Enregistrer la modification"><i class="material-icons">edit</i></button>
+                                <button class="delete-station" title="Supprimer la station"><i class="material-icons">delete</i></button>
+                                ${objButton}
+                                </div>
                             </div>
                             `;
                     const newDocument = new DOMParser().parseFromString(template, 'text/html');
