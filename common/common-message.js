@@ -272,7 +272,7 @@ function displayMessageDetails(objet, content, date, attachments, source) {
         <h2 class="msg-src">${source}</h2>
         <h5 class="msg-date">${normalizeDate(date)}</h5>
         <h1 class="msg-objet">${objet}</h1>
-        <textarea class="msg-content" rows="10" cols="100">${content}</textarea>
+        <textarea class="msg-content" rows="10" cols="100" readonly>${content}</textarea>
         <div class="msg-a-list">
         </div>
     </div>

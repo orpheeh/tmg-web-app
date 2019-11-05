@@ -12,3 +12,11 @@
 input {
     padding: 10px;
 }
+
+.wm-list h1 {
+    font-size: 14px;
+}
+
+.wm-list h1 span:hover {
+    cursor: pointer;
+}

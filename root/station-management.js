@@ -266,6 +266,7 @@ function addObjectifStation(station, carburant, lubrifiant, sfs, gpl) {
         if (objectif !== undefined) {
             console.log(objectif);
             alert("Objectif créer pour l'année " + annee);
+            hideObjectifModal();
         }
     });
 }

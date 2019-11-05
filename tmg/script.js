@@ -42,6 +42,11 @@ window.addEventListener('load', () => {
     document.querySelector('.message-item').addEventListener('click', () => changeMenuItem(1));
     document.querySelector('.wiki-station-item').addEventListener('click', () => changeMenuItem(2));
     document.querySelector('.actu-item').addEventListener('click', () => changeMenuItem(3));
+
+    document.querySelector('.actu-form-header').addEventListener('click', () => {
+        document.querySelector('.actu-form-content').classList.toggle('hide-form');
+    });
+
     wiki();
     messagerie();
     actu();
@@ -108,10 +113,6 @@ function actu() {
         data.actus.forEach(a => {
             displayActu(a.title, a.details, a.date, a._id);
         });
-    });
-
-    document.querySelector('.actu-form-header').addEventListener('click', () => {
-        document.querySelector('.actu-form-content').classList.toggle('hide-form');
     });
 }
 
