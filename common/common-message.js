@@ -289,8 +289,10 @@ function normalizeDate(d) {
 let responseSourceId = undefined;
 
 function displayMessageDetails(objet, content, date, attachments, source, sourceId, messageId) {
+    document.querySelector('.col-3').classList.add('col-3-show');
     const template = `
     <div class="msg">
+        <i class="material-icons msg-go-back">arrow_backward</i>
         <h2 class="msg-src">${source}</h2>
         <h5 class="msg-date">${normalizeDate(date)}</h5>
         <h1 class="msg-objet">${objet}</h1>
@@ -310,6 +312,11 @@ function displayMessageDetails(objet, content, date, attachments, source, source
         a.innerHTML = 'Télécharger ' + Math.round(att.size / 1024) + 'Ko';
         a.title = att.url.split('/')[att.url.split('/').length - 1];
         attachmentList.appendChild(a);
+    });
+
+    //Responsive retour à la liste
+    element.querySelector('.msg-go-back').addEventListener('click', () => {
+        document.querySelector('.col-3').classList.remove('col-3-show');
     });
 
     //Envoyer une réponse au message

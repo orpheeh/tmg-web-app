@@ -31,7 +31,17 @@
         display: none;
     }
     .col-3 {
+        display: none;
         width: 100vw;
+        height: 100vh;
+        padding-top: 120px;
+        position: absolute;
+        left: 0px;
+        background-color: white;
+        top: 0px;
+    }
+    .col-3-show {
+        display: grid;
     }
     .col-2 {
         background-color: #ffffff;

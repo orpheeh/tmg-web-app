@@ -38,6 +38,12 @@ window.addEventListener('load', () => {
     document.querySelector('.username').innerHTML = getUsername();
     document.querySelector('.fullname').innerHTML = getNom() + ' ' + getPrenom();
 
+    //
+    document.querySelector('#nav-bar-btn').addEventListener('click', () => {
+        console.log('click');
+        document.querySelector('.nav-bar').classList.toggle('show-responsive-nav');
+    });
+
     document.getElementById('display-fn').innerHTML = getNom() + ' ' + getPrenom();
     document.getElementById('down').addEventListener('click', () => {
         document.querySelector('.dropdown-menu').classList.toggle('show-dropdown-menu');

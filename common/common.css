@@ -267,4 +267,18 @@ h1.logo-title {
         grid-template-columns: auto;
         row-gap: 40px;
     }
+    .nav-bar {
+        display: none;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 50vw;
+        height: 100%;
+        margin: 0px;
+        background-color: #DF0C36;
+        z-index: 9000000;
+    }
+    .show-responsive-nav {
+        display: grid;
+    }
 }

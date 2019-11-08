@@ -84,14 +84,47 @@ input {
     border-bottom: 4px solid #DF0C36;
 }
 
+#nav-bar-btn {
+    display: none;
+}
+
 @media screen and (max-width: 800px) {
+    .nav-bar-menu-item:hover {
+        cursor: pointer;
+    }
     .nav-bar {
         grid-template-columns: 100%;
+        align-content: flex-start;
+        justify-content: start;
+        gap: 10px;
+        width: 50px;
+        height: 25px;
+        padding: 0px;
+        overflow: hidden;
+        margin-top: 25px;
+        margin-left: 10px;
     }
-    .nav-bar {
-        width: 100%;
+    .logo-total {
+        margin-left: 50px;
     }
     .nav-bar-item {
-        background-color: #eeeeee;
+        background-color: transparent;
+        color: white;
+        font-size: 14px;
+    }
+    #nav-bar-btn {
+        width: 50px;
+        height: 25px;
+        background-color: white;
+        border: 1px solid #DF0C36;
+        color: #DF0C36;
+        text-align: center;
+        display: block;
+    }
+    .show-responsive-nav {
+        width: 50%;
+        height: 100%;
+        margin-top: 0px;
+        margin-left: 0px;
     }
 }

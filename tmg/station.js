@@ -36,7 +36,7 @@ export function loadAllStation(callback = () => {}) {
         if (data !== null && data !== undefined) {
             const container = document.querySelector('.station-list');
             data.stations.forEach(station => {
-                if (station.admin !== undefined && station.admin._id === getId()) {
+                if (station.admin !== undefined && station.admin !== null && station.admin._id === getId()) {
                     const g = station.gerant === undefined || station.gerant === null ? 'Aucun gerant' : station.gerant.nom + ' ' + station.gerant.prenom;
                     displayStation(station._id, station.nom, g, container, station);
                 }

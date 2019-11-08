@@ -24,7 +24,9 @@
 <body>
 
     <header>
-        <img src="../images/logo.png" alt="" class="logo-total">
+        <div>
+            <img src="../images/logo.png" alt="" class="logo-total">
+        </div>
         <div class="user-informations">
             <h2 id="display-fn"></h2>
             <h1 id="down"><i class="material-icons">expand_more</i></h1>
@@ -43,7 +45,9 @@
     </header>
 
     <div class="main-container">
+
         <div class="nav-bar">
+            <i class="material-icons" id="nav-bar-btn">menu</i>
             <a href="#" class="nav-bar-item home-item selected-item">Accueil</a>
             <a href="#" class="nav-bar-item message-item">Messagerie</a>
             <a href="#" class="nav-bar-item wiki-station-item">Wiki</a>
@@ -149,8 +153,7 @@
                             </div>
                         </div>
                     </div>
-                    <button id="update-station">Enregistrer les
-                            modifications</button>
+                    <button id="update-station">Enregistrer les modifications</button>
                 </div>
             </div>
         </div>
@@ -173,7 +176,6 @@
                 <div class="col col-2">
                 </div>
                 <div class="col col-3">
-
                 </div>
 
                 <div class="modal create-message-modal">
@@ -191,8 +193,7 @@
                                         class="material-icons">clear</i>Annuler</button>
                         </div>
 
-                        <div class="modal-main-content
-                                create-message-container">
+                        <div class="modal-main-content create-message-container">
                             <div class="w-msg-h">
                                 <span>A: </span>
                                 <select class="gerant-list">
@@ -237,7 +238,8 @@
                 </div>
                 <div class="form-group">
                     <label>Détails</label>
-                    <textarea type="text" cols="10" rows="10" class="actu-details" placeholder="Placez le contenu ici..."></textarea>
+                    <textarea type="text" cols="10" rows="10" class="actu-details" placeholder="Placez le contenu
+                            ici..."></textarea>
                 </div>
                 <button id="publish-actu">Publier</button>
             </div>
