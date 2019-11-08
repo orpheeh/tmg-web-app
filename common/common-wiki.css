@@ -15,8 +15,24 @@
     align-items: center;
 }
 
+.wiki-feedback {
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: end;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.progress-indicator {
+    font-weight: 100;
+    font-size: 14px;
+    color: black;
+}
+
 .wiki-cat-header {
     background-color: #DF0C36;
+    display: grid;
+    grid-template-columns: auto auto;
 }
 
 .wiki-cat-header * {

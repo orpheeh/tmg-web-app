@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="../common/common-wiki.css">
     <link rel="stylesheet" href="../common/common-msg-responsive.css">
-
+    <link rel="stylesheet" href="../common/loading-screen.css">
     <link rel="stylesheet" href="station.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../fonts/helvetica.css">
@@ -27,7 +27,7 @@
         <img src="../images/logo.png" alt="" class="logo-total">
         <div class="user-informations">
             <h2 id="display-fn"></h2>
-            <h1 id="down" class="initial">ON</h1>
+            <h1 id="down"><i class="material-icons">expand_more</i></h1>
             <div class="dropdown-menu">
                 <div class="personal">
                     <h1 id="load-photo" class="initial">ON</h1>
@@ -36,8 +36,8 @@
                         <p class="username">nveorphee</p>
                     </div>
                 </div>
-                <button>Changer le mot de passe</button>
-                <button id="sign-out">Se déconnecter</button>
+                <a href="../change_password/index.html" class="dropdown-action">Changer le mot de passe</a>
+                <button class="dropdown-action" id="sign-out">Se déconnecter</button>
             </div>
         </div>
     </header>
@@ -137,7 +137,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Indicateur top service de la station</label>
+                                    <label>Indicateur top service de la
+                                            station</label>
                                     <input type="number" id="top-service">
                                 </div>
 
@@ -148,7 +149,8 @@
                             </div>
                         </div>
                     </div>
-                    <button id="update-station">Enregistrer les modifications</button>
+                    <button id="update-station">Enregistrer les
+                            modifications</button>
                 </div>
             </div>
         </div>
@@ -234,15 +236,20 @@
                     <input type="text" class="actu-title" , placeholder="Ecrivez le titre ici...">
                 </div>
                 <div class="form-group">
-                    <label>Details</label>
-                    <textarea type="text" cols="10" rows="3" class="actu-details" placeholder="Placeez le contenu
-                            ici..."></textarea>
+                    <label>Détails</label>
+                    <textarea type="text" cols="10" rows="10" class="actu-details" placeholder="Placez le contenu ici..."></textarea>
                 </div>
                 <button id="publish-actu">Publier</button>
             </div>
         </div>
     </div>
-
+    <div class="loading-modal loading-modal-show" id="loading-screen">
+        <div class="loading-content">
+            <div class="loader"></div>
+            <p>Veuillez patienter s'il vous plait</p>
+        </div>
+    </div>
+    <script src="../common/loading-screen.js" type="module"></script>
     <script src="./script.js" type="module"></script>
 </body>
 

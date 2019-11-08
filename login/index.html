@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../common/common.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../fonts/helvetica.css">
+    <link rel="stylesheet" href="../common/loading-screen.css">
     <title>Total Marketing Gabon | Login </title>
 </head>
 
@@ -26,9 +27,17 @@
             </div>
 
             <button id="login-button">Se connecter</button>
+            <a href="../init_password/index.html">Mot de passe oublié?</a>
+        </div>
+    </div>
+    <div class="loading-modal" id="loading-screen">
+        <div class="loading-content">
+            <div class="loader"></div>
+            <p>Veuillez patienter s'il vous plait</p>
         </div>
     </div>
 
+    <script src="../common/loading-screen.js" type="module"></script>
     <script src="./script.js" type="module" defer></script>
 
 </body>

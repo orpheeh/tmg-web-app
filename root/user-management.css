@@ -118,3 +118,13 @@ button:hover {
 .user-creating .create-user-button {
     display: inline-block;
 }
+
+@media screen and (max-width: 800px) {
+    .user .informations {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+    .users-table-content {
+        padding: 10px;
+    }
+}

@@ -2,7 +2,7 @@ import { getToken, getId, getUsername, getNom, getPrenom } from "../common/sessi
 import { IP } from "../common/tmg-web-service.js";
 
 
-export function loadMyStation() {
+export function loadMyStation(callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/station/', {
         method: 'GET',
@@ -21,9 +21,9 @@ export function loadMyStation() {
             const station = data.stations.find(s => s.gerant.nom === getNom() && s.gerant.prenom === getPrenom());
             if (station != null) {
                 //Afficher top service
-                let indicateur = `<i class="material-icons">arrow_downward</i>`;
+                let indicateur = `<i class="material-icons" style="color: red">arrow_downward</i>`;
                 if (station.top_service >= station.objectif_top_service) {
-                    indicateur = `<i class="material-icons">arrow_upward</i>`;
+                    indicateur = `<i class="material-icons" style="color: green">arrow_upward</i>`;
                 }
                 document.querySelector('#top-service').innerHTML = "Indicateur de votre station: <span>" + station.top_service + "</span>" + indicateur;
                 document.querySelector('#obj-top-service').innerHTML = "Objectif top service: <span>" + station.objectif_top_service + "</span>";
@@ -35,13 +35,13 @@ export function loadMyStation() {
                 document.querySelector('.st-lieu').innerHTML = station.location;
                 document.querySelector('.st-contact').innerHTML = station.service_client;
 
-                loadAllObjectif(station._id, station.nom, station.gerant.nom + ' ' + station.gerant.prenom);
+                loadAllObjectif(station._id, station.nom, station.gerant.nom + ' ' + station.gerant.prenom, callback);
             }
         }
     });
 }
 
-function loadAllObjectif(id, nom, gerant) {
+function loadAllObjectif(id, nom, gerant, callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/station/objectif/' + id, {
         method: 'GET',
@@ -62,6 +62,7 @@ function loadAllObjectif(id, nom, gerant) {
             if (objectif) {
                 displayStationDetails(objectif, nom, gerant);
             }
+            callback();
         }
     })
 }
@@ -103,20 +104,20 @@ function displayStationDetails(objectif, nom, gerant, annee) {
     console.log(currentObjectif.carburant.value);
 
     document.querySelector('.ind-carburant').innerHTML = parseInt(objectif["janvier"].carburant.objectif, 10) <= parseInt(currentObjectif.carburant.value, 10) ?
-        `<i class="material-icons">arrow_upward</i>` :
-        `<i class="material-icons">arrow_downward</i>`;
+        `<i class="material-icons" style="color: green">arrow_upward</i>` :
+        `<i class="material-icons" style="color: red">arrow_downward</i>`;
 
     document.querySelector('.ind-lubrifiant').innerHTML = parseInt(objectif["janvier"].lubrifiant.objectif, 10) <= parseInt(currentObjectif.lubrifiant.value, 10) ?
-        `<i class="material-icons">arrow_upward</i>` :
-        `<i class="material-icons">arrow_downward</i>`;
+        `<i class="material-icons" style="color: green">arrow_upward</i>` :
+        `<i class="material-icons" style="color: red">arrow_downward</i>`;
 
     document.querySelector('.ind-sfs').innerHTML = parseInt(objectif["janvier"].sfs.objectif, 10) <= parseInt(currentObjectif.sfs.value, 10) ?
-        `<i class="material-icons">arrow_upward</i>` :
-        `<i class="material-icons">arrow_downward</i>`;
+        `<i class="material-icons" style="color: green">arrow_upward</i>` :
+        `<i class="material-icons" style="color: red">arrow_downward</i>`;
 
     document.querySelector('.ind-gpl').innerHTML = parseInt(objectif["janvier"].gpl.objectif, 10) <= parseInt(currentObjectif.gpl.value, 10) ?
-        `<i class="material-icons">arrow_upward</i>` :
-        `<i class="material-icons">arrow_downward</i>`;
+        `<i class="material-icons" style="color: green">arrow_upward</i>` :
+        `<i class="material-icons" style="color: red">arrow_downward</i>`;
 
     //afficher les 3 dernier mois possible de l'année
     for (let i = idm - 1; i >= 0 && i >= idm - 3; i--) {

@@ -1,11 +1,17 @@
-h1 {
+h1,
+h2 {
     padding: 20px;
+    text-align: center;
 }
 
 .form-group {
     padding: 20px;
     display: grid;
-    grid-template-columns: 50%;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #004196;
 }
 
 .form-group input {
@@ -16,4 +22,25 @@ h1 {
 
 button {
     margin: 20px;
+    background: #DF0C36;
+}
+
+.main-content {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: auto;
+    align-content: center;
+    justify-content: center;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 30vw;
+    width: 100%;
+    justify-content: center;
+}
+
+p {
+    padding-bottom: 20px;
 }

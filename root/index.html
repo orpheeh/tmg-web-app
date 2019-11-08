@@ -12,15 +12,16 @@
     <link rel="stylesheet" href="./station-management.css">
     <link rel="stylesheet" href="../fonts/helvetica.css">
     <link rel="stylesheet" href="../common/common.css">
+    <link rel="stylesheet" href="../common/loading-screen.css">
     <title>Total Marketing Gabon | ROOT</title>
 </head>
 
 <body>
     <header>
-        <h1 class="logo-title">Total Marketing Gabon</h1>
+        <img src="../images/logo.png" class="logo-total" alt="Logo total">
         <div class="user-informations">
             <h2 id="display-fn">Bienvenue, root</h2>
-            <i id="down" class="material-icons">person</i>
+            <i id="down" class="material-icons">expand_more</i>
             <div class="dropdown-menu">
                 <button>Changer le mot de passe</button>
                 <button id="sign-out">Se déconnecter</button>
@@ -30,6 +31,7 @@
 
     <div class="main-container">
         <div class="nav-bar">
+            <a href="#" id="menu"><i class="material-icons">menu</i></a>
             <a href="#" class="nav-bar-item" id="user-management-item">Utilisateurs</a>
             <a href="#" class="nav-bar-item" id="station-management-item">Stations</a>
             <a href="#" class="nav-bar-item" id="wiki-management-item">Wiki</a>
@@ -44,9 +46,8 @@
                     <div class="search-bar">
                         <input type="text" id="search-bar-input" placeholder="Rechercher un utilisateur">
                     </div>
-                    <button id="add-user-button"><i class="material-icons">person_add</i>Ajouter un utilisitateur</button>
-                    <button id="actualize-users-list"><i
-                                class="material-icons">refresh</i> Recharger</button>
+                    <button id="add-user-button">Ajouter un utilisitateur</button>
+                    <button id="actualize-users-list">Recharger</button>
                 </div>
 
                 <div class="users-table-content">
@@ -56,8 +57,15 @@
 
             <!-- Station management -->
             <div class="main-content-item station-table">
+                <div class="button-options">
+                    <button id="add-station-button">Ajouter une station</button>
+                    <button id="import-excel">Importer excel</button>
+                    <div class="file-form-group">
+                        <label for="export-excel">Exporter excel</label>
+                        <input type="file" id="export-excel" accept=".xlsx">
+                    </div>
+                </div>
                 <div class="station-list">
-                    <a href="#" id="add-station-button">Ajouter une station</a>
                 </div>
 
                 <div class="modal objectif-modal">
@@ -80,7 +88,7 @@
 
                             <div class="form-group">
                                 <label for="sfs">SFS (Chiffre d' affaire)</label>
-                                <input type="number" id="sfs">
+                                <input type="number" step="0.01" id="sfs">
                             </div>
 
                             <div class="form-group">
@@ -107,6 +115,14 @@
         </div>
     </div>
 
+    <div class="loading-modal loading-modal-show" id="loading-screen">
+        <div class="loading-content">
+            <div class="loader"></div>
+            <p>Veuillez patienter s'il vous plait</p>
+        </div>
+    </div>
+
+    <script src="../common/download.js"></script>
     <script src="./script.js" type="module"></script>
 </body>
 

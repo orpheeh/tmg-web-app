@@ -22,6 +22,9 @@ export function displayCategorie(categorie) {
 
 
 export function displayWiki(wiki) {
+    if (wiki.files[0] === undefined) {
+        return;
+    }
     const template = `
      <div class="wiki">
         <a href="${wiki.files[0].url}" title="Il y' a deux jours"><i class="material-icons">image</i><span>${wiki.files[0].filename.split('-')[1]}</span></a>
@@ -34,7 +37,7 @@ export function displayWiki(wiki) {
     container.appendChild(element);
 }
 
-export function loadAllWiki() {
+export function loadAllWiki(callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/wiki/', {
         method: 'GET',
@@ -52,10 +55,11 @@ export function loadAllWiki() {
         if (data !== undefined) {
             data.wikis.forEach(wiki => displayWiki(wiki));
         }
+        callback();
     });
 }
 
-export function loadAllCategorie() {
+export function loadAllCategorie(callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/wiki/categories', {
         method: 'GET',
@@ -73,7 +77,7 @@ export function loadAllCategorie() {
             data.categories.forEach(c => {
                 displayCategorie(c);
             })
-            loadAllWiki();
+            loadAllWiki(callback);
         }
     })
 }

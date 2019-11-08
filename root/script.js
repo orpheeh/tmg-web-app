@@ -1,9 +1,21 @@
 import { removeToken } from "../common/session.js";
 import { onCreateUserButtonPressed, searchUser, actualizeUsersList, loadAllUser } from "./user-management.js";
-import { onAddStationButtonPressed, showObjectifModal, hideObjectifModal, saveObjectif } from "./station-management.js";
+import { onAddStationButtonPressed, showObjectifModal, hideObjectifModal, saveObjectif, importStation, exportStationForUpdate } from "./station-management.js";
 import { createCategorie, loadAllWikiCategorie } from "./wiki-management.js";
+import { hideBigLoadingScreen, showBigLoadingScreen } from "../common/loading-screen.js";
+
+let initialLoadingItemCount = 2;
+
+function onLoadingItemFinish() {
+    initialLoadingItemCount--;
+    if (initialLoadingItemCount === 0) {
+        hideBigLoadingScreen();
+    }
+}
 
 window.addEventListener('load', () => {
+    showBigLoadingScreen();
+
     userManagement();
     stationManagement();
     wikiManagement();
@@ -15,16 +27,22 @@ window.addEventListener('load', () => {
 });
 
 function wikiManagement() {
-    loadAllWikiCategorie();
+    loadAllWikiCategorie(() => {
+        onLoadingItemFinish();
+    });
     document.getElementById('create-wiki-cat').addEventListener('click', () => {
-        const nom = document.getElementById('input-nom-cat').value;
+        const element = element
+        const nom = element.value;
+        element.value = "";
         createCategorie(nom);
     });
 }
 
 function userManagement() {
     document.getElementById('add-user-button').addEventListener('click', () => onCreateUserButtonPressed());
-    loadAllUser();
+    loadAllUser(() => {
+        onLoadingItemFinish();
+    });
     document.getElementById('search-bar-input').addEventListener('keyup', (e) => searchUser(e));
     document.getElementById('actualize-users-list').addEventListener('click', () => actualizeUsersList());
     document.getElementById('sign-out').addEventListener('click', () => {
@@ -58,8 +76,13 @@ function changeMenuItem(item) {
 
 function stationManagement() {
     document.getElementById('add-station-button').addEventListener('click', () => onAddStationButtonPressed());
+    document.getElementById('import-excel').addEventListener('click', () => importStation());
+    document.getElementById('export-excel').addEventListener('change', (e) => {
+        if (e.target.files[0] !== undefined) {
+            exportStationForUpdate(e.target.files[0]);
+        }
+    });
 
     document.querySelector('.save-obj').addEventListener('click', () => { saveObjectif(); });
     document.querySelector('.cancel-obj').addEventListener('click', () => { hideObjectifModal(); });
-
 }

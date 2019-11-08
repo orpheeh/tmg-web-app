@@ -17,10 +17,19 @@ import {
 } from "../common/common-message.js";
 import { loadAllStation, updateStationConfig } from "./station.js";
 import { loadAllActu } from "../common/loading.js";
+import { showBigLoadingScreen, hideBigLoadingScreen } from "../common/loading-screen.js";
 
+let initialLoadingItemCount = 5;
+
+function onItemLoaded() {
+    initialLoadingItemCount--;
+    if (initialLoadingItemCount <= 0) {
+        hideBigLoadingScreen();
+    }
+}
 
 window.addEventListener('load', () => {
-
+    showBigLoadingScreen();
     //Load initial
     const initial = document.querySelectorAll('.initial');
     initial.forEach(ini => ini.innerHTML = getNom().charAt(0) + ' ' + getPrenom().charAt(0));
@@ -73,13 +82,13 @@ function changeMenuItem(index) {
 }
 
 function wiki() {
-    loadAllCategorie();
+    loadAllCategorie(() => { onItemLoaded() });
 }
 
 function messagerie() {
-    loadGerant();
-    loadAllMessage();
-    loadAllStation();
+    loadGerant(() => onItemLoaded());
+    loadAllMessage(() => onItemLoaded());
+    loadAllStation(() => onItemLoaded());
     document.querySelector('.add-gerant').addEventListener('click', () => addDst());
     document.querySelector('.add-all-gerant').addEventListener('click', () => addAllDst());
     document.getElementById('add-attachment-msg').addEventListener('change', (e) => {
@@ -110,19 +119,23 @@ function actu() {
         container.removeChild(container.firstChild);
     }
     loadAllActu((data) => {
+        data.actus = data.actus.reverse();
         data.actus.forEach(a => {
             displayActu(a.title, a.details, a.date, a._id);
         });
+        onItemLoaded();
     });
 }
 
-function displayActu(title, details, date, id) {
+function displayActu(title, details, d, id) {
     const container = document.getElementById("actu-container");
+
+    const date = new Date(d);
 
     const template = `
         <div class="actu">
             <h1>${title}</h1>
-            <h3>${date.toString()}</h3>
+            <h3>Publié le ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}</h3>
             <h2>${details}</h2>
             <button class="delete-actu">supprimer</button>
         </div>
@@ -135,6 +148,7 @@ function displayActu(title, details, date, id) {
 }
 
 function deleteActu(id) {
+    showBigLoadingScreen();
     const token = getToken();
     fetch(IP + '/tmg/actu/' + id, {
         method: 'DELETE',
@@ -146,10 +160,12 @@ function deleteActu(id) {
         if (response.status === 200) {
             actu();
         }
+        hideBigLoadingScreen();
     })
 }
 
 function publishActu(title, details) {
+    showBigLoadingScreen();
     const token = getToken();
     fetch(IP + '/tmg/actu/publish', {
         method: 'POST',
@@ -171,5 +187,6 @@ function publishActu(title, details) {
         if (data !== undefined) {
             actu();
         }
+        hideBigLoadingScreen();
     });
 }

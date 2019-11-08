@@ -1,8 +1,7 @@
 import { getToken, getId } from "../common/session.js";
 import { IP } from "../common/tmg-web-service.js";
 import { gerants } from "../common/common-message.js";
-
-google.charts.load('current', { packages: ['corechart', 'bar'] });
+import { hideBigLoadingScreen, showBigLoadingScreen } from "../common/loading-screen.js";
 
 const month = [
     "janvier",
@@ -19,7 +18,7 @@ const month = [
     "decembre"
 ];
 
-export function loadAllStation() {
+export function loadAllStation(callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/station/', {
         method: 'GET',
@@ -37,12 +36,13 @@ export function loadAllStation() {
         if (data !== null && data !== undefined) {
             const container = document.querySelector('.station-list');
             data.stations.forEach(station => {
-                if (station.admin._id === getId()) {
+                if (station.admin !== undefined && station.admin._id === getId()) {
                     const g = station.gerant === undefined || station.gerant === null ? 'Aucun gerant' : station.gerant.nom + ' ' + station.gerant.prenom;
                     displayStation(station._id, station.nom, g, container, station);
                 }
             });
         }
+        callback();
     });
 }
 
@@ -55,7 +55,10 @@ function displayStation(id, nom, gerant, container, station) {
     const element = new DOMParser()
         .parseFromString(template, 'text/html').querySelector('.station');
     element.addEventListener('click', () => {
-        loadAllObjectif(id, nom, gerant, station);
+        showBigLoadingScreen();
+        loadAllObjectif(id, nom, gerant, station, () => {
+            hideBigLoadingScreen();
+        });
     });
     container.appendChild(element);
 }
@@ -63,9 +66,20 @@ function displayStation(id, nom, gerant, container, station) {
 let objectifId;
 let stationId;
 
-export function updateStationConfig() {
+let updateStationActionCount = 2;
+
+function onUpdateStationActionFinish() {
+    updateStationActionCount--;
+    if (updateStationActionCount <= 0) {
+        hideBigLoadingScreen();
+        updateStationActionCount = 2;
+    }
+}
+
+export function updateStationConfig(callback = () => {}) {
     const updateButton = document.getElementById('update-station');
     updateButton.addEventListener('click', function() {
+        showBigLoadingScreen();
         const idm = new Date().getMonth();
 
         const stationObjectifCarburant = document.getElementById('obj-carburant');
@@ -99,10 +113,9 @@ export function updateStationConfig() {
             stationValueLubrifiant.value,
             stationValueSFS.value,
             stationValueGPL.value,
-            objectifId);
-
-        console.log(stationObjectifCarburant.value);
-        console.log(stationObjectifLubrifiant.value);
+            objectifId, () => {
+                onUpdateStationActionFinish();
+            });
 
         //Mettre à jour les informations de la station
         updateStation(
@@ -114,11 +127,13 @@ export function updateStationConfig() {
             stationIndicateurFiliale.value,
             stationGerantInput.value,
             stationId,
-            stationObjectifTopService.value);
+            stationObjectifTopService.value, () => {
+                onUpdateStationActionFinish();
+            });
     });
 }
 
-function loadAllObjectif(id, nom, gerant, station) {
+function loadAllObjectif(id, nom, gerant, station, callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/station/objectif/' + id, {
         method: 'GET',
@@ -205,53 +220,13 @@ function loadAllObjectif(id, nom, gerant, station) {
                 stationValueLubrifiant.value = current.lubrifiant.value;
                 stationValueSFS.value = current.sfs.value;
                 stationValueGPL.value = current.gpl.value;
-
-                //displayStationDetails(objectif, nom, gerant);
-
             }
         }
+        callback();
     })
 }
 
-function drawChart(values, element, title) {
-    // Define the chart to be drawn.
-    var data = google.visualization.arrayToDataTable([
-        ['Mois', title],
-        ['Janvier', values[0]], // RGB value
-        ['Fevrier', values[1]], // English color name
-        ['Mars', values[2]],
-        ['Avril', values[3]],
-        ['Mai', values[4]], // CSS-style declaration
-        ['Juin', values[5]], // CSS-style declaration
-        ['Juillet', values[6]], // CSS-style declaration
-        ['Aout', values[7]], // CSS-style declaration
-        ['Septembre', values[8]], // CSS-style declaration
-        ['Octobre', values[9]], // CSS-style declaration
-        ['Novembre', values[10]], // CSS-style declaration
-        ['Decembre', values[11]], // CSS-style declaration
-    ]);
-
-    var options = {
-        title: 'Motivation and Energy Level Throughout the Day',
-        hAxis: {
-            title: 'Time of Day',
-            format: 'h:mm a',
-            viewWindow: {
-                min: [7, 30, 0],
-                max: [17, 30, 0]
-            }
-        },
-        vAxis: {
-            title: 'Rating (scale of 1-10)'
-        }
-    };
-
-    // Instantiate and draw the chart.
-    var materialChart = new google.charts.Bar(element);
-    materialChart.draw(data, options);
-}
-
-function updateStation(nom, ville, location, service_client, top_service, indicateur_filial, gerant, id, objectif_top_service) {
+function updateStation(nom, ville, location, service_client, top_service, indicateur_filial, gerant, id, objectif_top_service, callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/station/update/' + id, {
         method: 'PUT',
@@ -273,10 +248,11 @@ function updateStation(nom, ville, location, service_client, top_service, indica
         if (response.status === 200) {
             alert("Mise à jour effectué");
         }
+        callback();
     });
 }
 
-function updateObjectifsStation(carburant, lubrifiant, sfs, gpl, month, vc, vl, vs, vg, id) {
+function updateObjectifsStation(carburant, lubrifiant, sfs, gpl, month, vc, vl, vs, vg, id, callback = () => {}) {
     const token = getToken();
     const json = `{
         "${month}": {
@@ -303,5 +279,6 @@ function updateObjectifsStation(carburant, lubrifiant, sfs, gpl, month, vc, vl, 
             console.log(data);
             alert("Mise à jour, ok");
         }
+        callback();
     });
 }

@@ -2,11 +2,14 @@ import { GERANT, TMG } from '../../common/role.js';
 import { IP } from '../../common/tmg-web-service.js';
 import { getToken } from '../../common/session.js';
 import { userGerant } from './messagerie/messageData.js';
+import { showBigLoadingScreen, hideBigLoadingScreen } from './loading-screen.js';
 
 let _attachments = [];
 export let gerants = [];
 let _myMessages = [];
 export let _tmg = [];
+let messageSource = undefined;
+
 
 export function addAttachmentMsg(file) {
     _attachments.push(file);
@@ -95,7 +98,7 @@ function addDstFrom(inner, value) {
     dstList.appendChild(element);
 }
 
-export function loadGerant() {
+export function loadGerant(callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/user/find', {
         method: 'GET',
@@ -121,10 +124,11 @@ export function loadGerant() {
             });
             loadGerantListComponent();
         }
+        callback();
     });
 }
 
-export function loadTMG() {
+export function loadTMG(callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/user/find', {
         method: 'GET',
@@ -146,6 +150,7 @@ export function loadTMG() {
                 }
             });
         }
+        callback();
     });
 }
 
@@ -164,6 +169,7 @@ export function showCreateMessageModal() {
 }
 
 export function hideCreateMessageModal() {
+    messageSource = undefined;
     clearMessageModal();
     document.querySelector('.create-message-modal').classList.remove('show-modal');
 }
@@ -172,29 +178,39 @@ export function sendMessage(destinataires = []) {
     const objet = document.getElementById('message-objet').value;
     const content = document.getElementById('the-message').value;
 
-    console.log("send message");
-    console.log(destinataires);
     if (destinataires == [] || destinataires.length === 0) {
         const dstDocuments = document.querySelectorAll('.dst');
         dstDocuments.forEach(dst => {
             destinataires.push(dst.querySelector('.dst-id').innerHTML);
         });
     }
-    console.log(destinataires);
     const token = getToken();
     const formData = new FormData();
-    console.log(_attachments);
     _attachments.forEach(attachment => formData.append('attachment', attachment));
     formData.append('objet', objet);
     formData.append('content', content);
     formData.append('destinataires', JSON.stringify(destinataires));
-    fetch(IP + '/tmg/messagerie/send', {
+
+    //Verification
+    if (destinataires.length == 0) {
+        alert("Il faut au moins un destinateire");
+        return;
+    }
+    if (objet == "") {
+        alert("Le message ne peut être envoyé sans objet");
+        return;
+    }
+
+    showBigLoadingScreen();
+    const api = messageSource === undefined ? '/tmg/messagerie/send' : '/tmg/messagerie/send/response/' + messageSource;
+    fetch(IP + api, {
         method: 'POST',
         headers: {
             'authorization': 'Bearer ' + token
         },
         body: formData
     }).then(response => {
+        messageSource = undefined;
         if (response.status === 200) {
             return response.json();
         } else {
@@ -202,13 +218,14 @@ export function sendMessage(destinataires = []) {
         }
     }).then(data => {
         if (data !== undefined) {
-            console.log(data);
             hideCreateMessageModal();
+            loadAllMessage();
         }
+        hideBigLoadingScreen();
     });
 }
 
-export function loadAllMessage() {
+export function loadAllMessage(callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/messagerie/myMessages', {
         method: 'GET',
@@ -223,8 +240,11 @@ export function loadAllMessage() {
         if (data !== undefined) {
             console.log(data);
             _myMessages = data;
+            _myMessages.messages_receive = _myMessages.messages_receive.reverse();
+            _myMessages.messages_send = _myMessages.messages_send.reverse();
             displayReceiveMessage();
         }
+        callback();
     })
 }
 
@@ -242,7 +262,7 @@ function clearMessageDetails() {
     }
 }
 
-function displayMessage(objet, content, date, attachments, source) {
+function displayMessage(objet, content, date, attachments, source, userSource, messageId) {
     const container = document.querySelector('.col-3');
     const template = `
         <div class="msg-snap">
@@ -255,7 +275,7 @@ function displayMessage(objet, content, date, attachments, source) {
     const element = doc.querySelector('.msg-snap');
     element.querySelector('.msg-snap-objet').addEventListener('click', () => {
         clearMessageDetails();
-        container.appendChild(displayMessageDetails(objet, content, date, attachments, source));
+        container.appendChild(displayMessageDetails(objet, content, date, attachments, source, userSource._id, messageId));
     });
     return element;
 }
@@ -266,7 +286,9 @@ function normalizeDate(d) {
     return date.getDate() + ' ' + month[date.getMonth()] + ' ' + date.getFullYear() + ' à ' + date.getHours() + ':' + date.getMinutes();
 }
 
-function displayMessageDetails(objet, content, date, attachments, source) {
+let responseSourceId = undefined;
+
+function displayMessageDetails(objet, content, date, attachments, source, sourceId, messageId) {
     const template = `
     <div class="msg">
         <h2 class="msg-src">${source}</h2>
@@ -275,6 +297,7 @@ function displayMessageDetails(objet, content, date, attachments, source) {
         <textarea class="msg-content" rows="10" cols="100" readonly>${content}</textarea>
         <div class="msg-a-list">
         </div>
+        <button class="message-response">Répondre</button>
     </div>
 `;
     const doc = new DOMParser().parseFromString(template, 'text/html');
@@ -288,6 +311,20 @@ function displayMessageDetails(objet, content, date, attachments, source) {
         a.title = att.url.split('/')[att.url.split('/').length - 1];
         attachmentList.appendChild(a);
     });
+
+    //Envoyer une réponse au message
+    element.querySelector('.message-response').addEventListener('click', () => {
+        const select = document.querySelector('.gerant-list');
+        if (select !== null) {
+            select.value = sourceId;
+            clearMessageModal();
+            addDst();
+        }
+        showCreateMessageModal();
+        messageSource = messageId;
+        responseSourceId = sourceId;
+    });
+
     return element;
 }
 
@@ -300,7 +337,7 @@ export function displayReceiveMessage() {
             if (m.source.role == TMG) {
                 source = 'Total Marketing Gabon';
             }
-            container.appendChild(displayMessage(m.objet, m.content, m.date, m.attachments, source));
+            container.appendChild(displayMessage(m.objet, m.content, m.date, m.attachments, source, m.source, m._id));
         });
     }
 }
@@ -315,14 +352,17 @@ export function displaySendMessage() {
             if (m.source.role == TMG) {
                 source = 'Total Marketing Gabon';
             }
-            container.appendChild(displayMessage(m.objet, m.content, m.date, m.attachments, source));
+            container.appendChild(displayMessage(m.objet, m.content, m.date, m.attachments, source, m.source, m._id));
         });
     }
 }
 
 export function sendTMGMessage() {
     const destinataires = [];
-    _tmg.forEach(tmg => destinataires.push(tmg._id));
-    console.log(destinataires);
+    if (messageSource !== undefined) {
+        destinataires.push(responseSourceId);
+    } else {
+        _tmg.forEach(tmg => destinataires.push(tmg._id));
+    }
     sendMessage(destinataires);
 }

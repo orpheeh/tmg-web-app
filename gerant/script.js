@@ -13,11 +13,22 @@ import {
 import { loadAllCategorie } from "./wiki/wiki.js";
 import { loadMyStation } from "./station.js";
 import { changePhoto } from "./photo.js";
+import { showBigLoadingScreen, hideBigLoadingScreen } from "../common/loading-screen.js";
+
+let initialLoadingItemCount = 5;
+
+function onItemLoaded() {
+    initialLoadingItemCount--;
+    if (initialLoadingItemCount <= 0) {
+        hideBigLoadingScreen();
+    }
+}
 
 window.addEventListener('load', () => {
+    showBigLoadingScreen();
     messagerie();
     wiki();
-    loadMyStation();
+    loadMyStation(() => onItemLoaded());
     actu();
 
     //Load initial
@@ -72,8 +83,8 @@ function changeMenuItem(index) {
 }
 
 function messagerie() {
-    loadAllMessage();
-    loadTMG();
+    loadAllMessage(() => onItemLoaded());
+    loadTMG(() => onItemLoaded());
     displayReceiveMessage();
 
     document.getElementById('add-attachment-msg').addEventListener('change', (e) => {
@@ -104,7 +115,7 @@ function messagerie() {
 }
 
 function wiki() {
-    loadAllCategorie();
+    loadAllCategorie(() => onItemLoaded());
 }
 
 function actu() {
@@ -113,19 +124,21 @@ function actu() {
         container.removeChild(container.firstChild);
     }
     loadAllActu((data) => {
+        data.actus = data.actus.reverse();
         data.actus.forEach(a => {
             displayActu(a.title, a.details, a.date, a._id);
         });
+        onItemLoaded();
     });
 }
 
-function displayActu(title, details, date, id) {
+function displayActu(title, details, d, id) {
     const container = document.getElementById("actu-container");
-
+    const date = new Date(d);
     const template = `
         <div class="actu">
             <h1>${title}</h1>
-            <h3>${date.toString()}</h3>
+            <h3>Publié le ${date.getDate()}/${date.getMonth()}/${date.getFullYear()} à ${date.getHours()}:${date.getMinutes()}</h3>
             <h2>${details}</h2>
         </div>
     `;

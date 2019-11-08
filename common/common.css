@@ -42,6 +42,10 @@ button:hover {
     cursor: pointer;
 }
 
+#down {
+    color: #DF0C36;
+}
+
 .user-informations h1 {
     font-size: 16px;
     color: #7D7064;
@@ -70,15 +74,18 @@ button:hover {
     display: grid;
 }
 
-.dropdown-menu button {
+.dropdown-menu .dropdown-action {
     padding: 0px;
     margin: 0px;
     padding: 20px;
     background-color: white;
     color: #777777;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
 }
 
-.dropdown-menu button:hover {
+.dropdown-menu .dropdown-action:hover {
     background-color: #eeeeee;
 }
 
@@ -205,13 +212,14 @@ h1.logo-title {
     bottom: 0px;
     right: 0px;
     width: 30vw;
+    border: 1px solid #cccccc;
     box-shadow: 10px 20px 20px #777777;
     background-color: white;
 }
 
 .actu h3 {
     font-size: 12px;
-    font-weight: 100;
+    font-weight: bold;
     color: #777777;
     margin-bottom: 10px;
 }
@@ -236,10 +244,11 @@ h1.logo-title {
 .actu-form button {
     margin: 20px;
     padding: auto;
+    background-color: #DF0C36;
 }
 
 .actu-form-header {
-    background-color: #004196;
+    background-color: #DF0C36;
     color: white;
 }
 

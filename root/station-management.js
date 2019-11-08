@@ -1,18 +1,69 @@
 import { getToken } from "../common/session.js";
 import { IP } from "../common/tmg-web-service.js";
 import { TMG } from "../common/role.js";
+import { hideBigLoadingScreen, showBigLoadingScreen } from "../common/loading-screen.js";
 
 let users = [];
 
 export function onAddStationButtonPressed() {
-    addStation('Nouvelle station');
+    showBigLoadingScreen();
+    addStation('Nouvelle station', () => {
+        hideBigLoadingScreen();
+    });
 }
 
-export function onUpdateStationButtonPressed() {
-
+export function importStation() {
+    showBigLoadingScreen();
+    const token = getToken();
+    fetch(IP + '/tmg/station/import', {
+        method: 'GET',
+        headers: {
+            'authorization': 'Beare ' + token
+        }
+    }).then(response => {
+        if (response.status === 200) {
+            return response.blob();
+        } else {
+            response.alert("Error " + response.status);
+        }
+    }).then(blob => {
+        if (blob !== null && blob !== undefined) {
+            download(blob, "station-service-" + new Date().getFullYear() + ".xlsx");
+        }
+        hideBigLoadingScreen();
+    });
 }
 
-function addStation(nom) {
+export function exportStationForUpdate(excelFile) {
+    showBigLoadingScreen();
+    const token = getToken();
+    const formData = new FormData();
+    formData.append('excel', excelFile, "station-service.xlsx");
+    fetch(IP + '/tmg/station/export', {
+        method: 'POST',
+        headers: {
+            'authorization': 'Bearer ' + token
+        },
+        body: formData
+    }).then(response => {
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            alert('Error ' + response.status);
+        }
+    }).then(json => {
+        //Reload all station
+        if (json !== undefined && json !== null) {
+            console.log(json);
+            clearList();
+            loadAllStation(() => hideBigLoadingScreen());
+        } else {
+            hideBigLoadingScreen();
+        }
+    });
+}
+
+function addStation(nom, callback = () => {}) {
 
     const token = getToken();
     fetch(IP + '/tmg/station/create', {
@@ -29,14 +80,15 @@ function addStation(nom) {
             return response.json();
         } else {
             alert("Error " + response.status);
+            hideBigLoadingScreen();
         }
     }).then(data => {
         clearList();
-        loadAllStation();
+        loadAllStation(callback);
     });
 }
 
-function updateStation(nom, admin, id) {
+function updateStation(nom, admin, id, callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/station/update/' + id, {
         method: 'PUT',
@@ -51,7 +103,10 @@ function updateStation(nom, admin, id) {
     }).then(response => {
         if (response.status === 200) {
             clearList();
-            loadAllStation();
+            loadAllStation(callback);
+        } else {
+            hideBigLoadingScreen();
+            alert("Erreur " + response.status);
         }
     });
 }
@@ -68,9 +123,8 @@ export function setUsersList(pUsers) {
     loadAllStation();
 }
 
-export function loadAllStation() {
+export function loadAllStation(callback = () => {}) {
     const token = getToken();
-
     const container = document.querySelector('.station-list');
     fetch(IP + '/tmg/station/', {
         method: 'GET',
@@ -83,6 +137,7 @@ export function loadAllStation() {
             return response.json();
         } else {
             alert("Error " + response.status);
+            hideBigLoadingScreen();
         }
     }).then(data => {
         if (data !== null && data !== undefined) {
@@ -97,26 +152,28 @@ export function loadAllStation() {
                     }).then(response => response.json()).then(data => {
                     console.log(data.objectifs.length);
                     const objButton = data.objectifs.length == 0 ? `<button class="add-objectif-station" title="ajouter un objectif"><i class="material-icons">add</i></button>` : "";
+
                     const template = `
-                            <div class="station">
-                                <i class="material-icons">ev_station</i>
-                                <div class="form-group">
-                                    <label>Nom de la station</label>
-                                    <input type="text" class="station-name" value="Nouvelle station" />
-                                </div>
+                    <div class="station">
+                        <i class="material-icons">ev_station</i>
+                        <div class="form-group">
+                            <label>Nom de la station</label>
+                            <input type="text" class="station-name" value="Nouvelle station" />
+                        </div>
+                
+                        <div class="form-group">
+                            <label>Responsable siège</label>
+                            <select class="station-tmg"></select>
+                        </div>
+                
+                        <div class="actions">
+                        <button class="update-station" title="Enregistrer la modification"><i class="material-icons">edit</i></button>
+                        <button class="delete-station" title="Supprimer la station"><i class="material-icons">delete</i></button>
+                        ${objButton}
+                        </div>
+                    </div>
+                    `;
 
-                                <div class="form-group">
-                                    <label>Responsable siège</label>
-                                    <select class="station-tmg"></select>
-                                </div>
-
-                                <div class="actions">
-                                <button class="update-station" title="Enregistrer la modification"><i class="material-icons">edit</i></button>
-                                <button class="delete-station" title="Supprimer la station"><i class="material-icons">delete</i></button>
-                                ${objButton}
-                                </div>
-                            </div>
-                            `;
                     const newDocument = new DOMParser().parseFromString(template, 'text/html');
                     const element = newDocument.querySelector('.station');
                     element.querySelector('.update-station').addEventListener('click', () => {
@@ -125,10 +182,16 @@ export function loadAllStation() {
                         if (tmg === 'none') {
                             tmg === undefined;
                         }
-                        updateStation(nom, tmg, station._id);
+                        showBigLoadingScreen();
+                        updateStation(nom, tmg, station._id, () => {
+                            hideBigLoadingScreen();
+                        });
                     });
                     element.querySelector('.delete-station').addEventListener('click', () => {
-                        deleteStation(station._id);
+                        showBigLoadingScreen();
+                        deleteStation(station._id, () => {
+                            hideBigLoadingScreen();
+                        });
                     });
                     element.querySelector('.station-name').value = station.nom;
 
@@ -161,6 +224,7 @@ export function loadAllStation() {
                     container.appendChild(element);
                 });
             });
+            callback();
         }
     });
 }
@@ -168,6 +232,11 @@ export function loadAllStation() {
 function addObjectifStation(station, carburant, lubrifiant, sfs, gpl) {
     const token = getToken();
     const annee = new Date().getFullYear();
+    if (carburant == "" || lubrifiant == "" || sfs == "" || gpl == "") {
+        alert("Erreur, Aucun champ ne doit être vide !");
+        return;
+    }
+    showBigLoadingScreen();
     fetch(IP + '/tmg/station/objectif/create', {
         method: 'POST',
         headers: {
@@ -268,10 +337,11 @@ function addObjectifStation(station, carburant, lubrifiant, sfs, gpl) {
             alert("Objectif créer pour l'année " + annee);
             hideObjectifModal();
         }
+        hideBigLoadingScreen();
     });
 }
 
-function deleteStation(id) {
+function deleteStation(id, callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/station/delete/' + id, {
         method: 'DELETE',
@@ -281,9 +351,10 @@ function deleteStation(id) {
     }).then(response => {
         if (response.status === 200) {
             clearList();
-            loadAllStation();
+            loadAllStation(callback);
         } else {
             alert("Error " + response.status);
+            hideBigLoadingScreen();
         }
     });
 }

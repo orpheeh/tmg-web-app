@@ -8,28 +8,40 @@
     <link rel="stylesheet" href="../common/common.css">
     <link rel="stylesheet" href="../fonts/helvetica.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../common/loading-screen.css">
     <title>Total Marketing Gabon | Changer le mot de passe</title>
 </head>
 
 <body>
-    <h1>Changez votre mot de passe</h1>
-    <div class="form-group">
-        <label for="password">Mot de passe actuel</label>
-        <input type="password" id="password">
+    <div class="main-content">
+        <div>
+            <h2 class="username"></h2>
+            <p>Vous êtes sur l'extranet de Total Marketing Gabon, vous pouvez changer votre mot de passe</p>
+        </div>
+        <div class="form">
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Mot de passe actuel">
+            </div>
+            <div class="form-group">
+                <input type="password" id="newpassword" placeholder="Nouveau mot de passe">
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="confnewpassword" placeholder="Confirmer nouveau mot de passe">
+            </div>
+
+            <button>Changer</button>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="newpassword">Nouveau mot de passe</label>
-        <input type="password" id="newpassword">
+    <div class="loading-modal" id="loading-screen">
+        <div class="loading-content">
+            <div class="loader"></div>
+            <p>Veuillez patienter s'il vous plait</p>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="confnewpassword">Confirmez le nouveau mot de passe</label>
-        <input type="password" id="confnewpassword">
-    </div>
-
-    <button>Changer</button>
-
+    <script src="../common/loading-screen.js" type="module"></script>
     <script src="./script.js" type="module"></script>
 </body>
 

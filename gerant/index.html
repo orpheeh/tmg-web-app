@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../common/common-wiki.css">
     <link rel="stylesheet" href="../common/common-messagerie.css">
 
+    <link rel="stylesheet" href="../common/loading-screen.css">
     <link rel="stylesheet" href="./home-style.css">
     <link rel="stylesheet" href="../common/common.css">
     <link rel="stylesheet" href="../common/common-msg-responsive.css">
@@ -34,10 +35,9 @@
         <img src="../images/logo.png" alt="Le logo de total" class="logo-total">
         <div class="user-informations">
             <h2 id="display-fn"></h2>
-            <i id="down" class="material-icons">person</i>
+            <i id="down" class="material-icons">expand_more</i>
             <h1 class="initial">ON</h1>
-            <img src="../images/station.jpg" class="down" alt="la photo de
-                    profile" id="photo">
+            <img src="../images/station.jpg" class="down" alt="photo de profile" id="photo">
             <div class="dropdown-menu">
                 <div class="personal">
                     <h1 id="load-photo" class="initial">ON</h1>
@@ -50,8 +50,8 @@
                         <input type="file" id="chphoto" />
                     </div>
                 </div>
-                <button>Changer le mot de passe</button>
-                <button id="sign-out">Se déconnecter</button>
+                <a class="dropdown-action" href="../change_password/index.html">Changer le mot de passe</a>
+                <button class="dropdown-action" id="sign-out">Se déconnecter</button>
             </div>
         </div>
     </header>
@@ -242,6 +242,14 @@
         </div>
     </div>
 
+    <div class="loading-modal loading-modal-show" id="loading-screen">
+        <div class="loading-content">
+            <div class="loader"></div>
+            <p>Veuillez patienter s'il vous plait</p>
+        </div>
+    </div>
+
+    <script src="../common/loading-screen.js" type="module"></script>
     <script src="./script.js" type="module"></script>
 </body>
 

@@ -1,13 +1,17 @@
 import { IP } from "../common/tmg-web-service.js";
 import { getToken, removeToken } from "../common/session.js";
 import { setUsersList } from "./station-management.js";
+import { showBigLoadingScreen, hideBigLoadingScreen } from "../common/loading-screen.js";
 
 export function actualizeUsersList() {
+    showBigLoadingScreen();
     const container = document.querySelector('.users-table-content');
     while (container.firstChild) {
         container.removeChild(container.firstChild);
     }
-    loadAllUser();
+    loadAllUser(() => {
+        hideBigLoadingScreen();
+    });
 }
 
 export function searchUser(e) {
@@ -19,8 +23,7 @@ export function searchUser(e) {
         const str = element.querySelector('.nom').value + ' ' +
             element.querySelector('.prenom').value + ' ' +
             element.querySelector('.username').value;
-
-        if (str.search(e.target.value) < 0) {
+        if (str.toLowerCase().search(e.target.value.toLowerCase()) < 0) {
             container.removeChild(element);
         }
     });
@@ -41,6 +44,10 @@ export function onCreateUserButtonPressed() {
                     <div class="form-group">
                         <label>Nom d'utilisateur</label>
                         <input class="username" type="text" placeholder="nom d'utilisateur">
+                    </div>
+                    <div class="form-group">
+                        <label>Adresse email</label>
+                        <input class="email" type="email" placeholder="Adresse email">
                     </div>
                     <div class="form-group">
                         <label>Téléphone</label>
@@ -73,9 +80,10 @@ export function onCreateUserButtonPressed() {
         const tel = user.querySelector('.tel').value;
         const role = user.querySelector('.role').value;
         const username = user.querySelector('.username').value;
+        const email = user.querySelector('.email').value;
         const password = 'changemoi';
 
-        createUser(nom, prenom, tel, role, username, password);
+        createUser(nom, prenom, tel, role, username, password, email);
         user.classList.remove('user-creating');
     });
 
@@ -87,7 +95,7 @@ export function onCreateUserButtonPressed() {
     container.insertBefore(user, container.childNodes[0]);
 }
 
-export function loadAllUser() {
+export function loadAllUser(callback = () => {}) {
     const template = `
             <div class="user">
                 <div class="informations">
@@ -102,6 +110,10 @@ export function loadAllUser() {
                     <div class="form-group">
                         <label>Nom d'utilisateur</label>
                         <input class="username" type="text" placeholder="nom d'utilisateur">
+                    </div>
+                    <div class="form-group">
+                        <label>Adresse email</label>
+                        <input class="email" type="text" placeholder="Adresse email">
                     </div>
                     <div class="form-group">
                         <label>Téléphone</label>
@@ -147,6 +159,7 @@ export function loadAllUser() {
                     element.querySelector('.username').value = user.username;
                     element.querySelector('.tel').value = user.telephone;
                     element.querySelector('.role').value = user.role;
+                    element.querySelector('.email').value = user.email;
                     container.appendChild(element);
 
                     element.querySelector('.update-user').addEventListener('click', () => {
@@ -156,7 +169,8 @@ export function loadAllUser() {
                         const username = element.querySelector('.username').value;
                         const telephone = element.querySelector('.tel').value;
                         const role = element.querySelector('.role').value;
-                        updateUser(nom, prenom, telephone, username);
+                        const email = element.querySelector('.email').value;
+                        updateUser(nom, prenom, telephone, username, role, email);
                     });
 
                     element.querySelector('.delete-user').addEventListener('click', () => {
@@ -165,11 +179,13 @@ export function loadAllUser() {
                     });
                 }
             });
+            callback();
         }
     });
 }
 
 export function deleteUser(id, element, container) {
+    showBigLoadingScreen();
     const token = getToken();
     fetch(IP + '/tmg/user/delete', {
         method: 'DELETE',
@@ -187,10 +203,12 @@ export function deleteUser(id, element, container) {
         } else {
             alert("Error " + response.status);
         }
+        hideBigLoadingScreen();
     })
 }
 
-export function updateUser(nom, prenom, telephone, username) {
+export function updateUser(nom, prenom, telephone, username, role, email) {
+    showBigLoadingScreen();
     const token = getToken();
     console.log(nom + ' ' + prenom);
     fetch(IP + '/tmg/user/update', {
@@ -204,7 +222,9 @@ export function updateUser(nom, prenom, telephone, username) {
             update: {
                 nom,
                 prenom,
-                telephone
+                telephone,
+                role,
+                email
             }
         })
     }).then(response => {
@@ -218,11 +238,11 @@ export function updateUser(nom, prenom, telephone, username) {
             console.log(data);
             alert("Mise à jour enregistré");
         }
+        hideBigLoadingScreen();
     });
 }
 
-export function createUser(nom, prenom, tel, role, username, password) {
-    console.log(nom + ' ' + prenom + ' ' + tel + ' ' + role + ' ' + username + ' ' + password);
+export function createUser(nom, prenom, tel, role, username, password, email) {
     const token = getToken();
 
     fetch(IP + '/tmg/user/register', {
@@ -237,11 +257,11 @@ export function createUser(nom, prenom, tel, role, username, password) {
             nom,
             prenom,
             telephone: tel,
-            role
+            role,
+            email
         })
     }).then(response => {
         if (response.status == 200) {
-            console.log("Success");
             return response.json();
         } else {
             console.log("Error, remove last user on list");

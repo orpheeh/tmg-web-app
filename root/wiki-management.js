@@ -1,9 +1,11 @@
 import { IP } from "../common/tmg-web-service.js";
 import { getToken } from "../common/session.js";
+import { showBigLoadingScreen, hideBigLoadingScreen } from "../common/loading-screen.js";
 
 let _categorieList = [];
 
 export function createCategorie(nom) {
+    showBigLoadingScreen();
     const token = getToken();
     fetch(IP + '/tmg/wiki/categorie/create', {
         method: 'POST',
@@ -24,7 +26,7 @@ export function createCategorie(nom) {
         if (data !== undefined) {
             _categorieList.push(data.newCategorie);
             console.log(data);
-            loadAllWikiCategorie();
+            loadAllWikiCategorie(() => hideBigLoadingScreen());
         }
     });
 }
@@ -40,6 +42,7 @@ function displayCategorie(categorie) {
 }
 
 export function deleteCategorie(id) {
+    showBigLoadingScreen();
     const token = getToken();
     fetch(IP + '/tmg/wiki/categorie/' + id, {
         method: 'DELETE',
@@ -55,7 +58,7 @@ export function deleteCategorie(id) {
         }
     }).then(data => {
         if (data !== undefined) {
-            loadAllWikiCategorie();
+            loadAllWikiCategorie(() => hideBigLoadingScreen());
         }
     });
 }
@@ -68,7 +71,7 @@ function clearCatWikiList() {
     }
 }
 
-export function loadAllWikiCategorie() {
+export function loadAllWikiCategorie(callback = () => {}) {
     const token = getToken();
     fetch(IP + '/tmg/wiki/categories', {
         method: 'GET',
@@ -88,6 +91,7 @@ export function loadAllWikiCategorie() {
             data.categories.forEach(c => {
                 displayCategorie(c);
             })
+            callback();
         }
     });
 }

@@ -1,6 +1,7 @@
 import { IP } from "../common/tmg-web-service.js";
 import { saveToken } from "../common/session.js";
 import { ROOT, TMG, GERANT } from "../common/role.js";
+import { showBigLoadingScreen, hideBigLoadingScreen } from "../common/loading-screen.js";
 
 window.addEventListener('load', () => {
     document.getElementById('login-button').addEventListener('click', onLoginButtonPressed);
@@ -15,6 +16,7 @@ function onLoginButtonPressed() {
 }
 
 function login(username, password) {
+    showBigLoadingScreen();
     fetch(IP + '/tmg/user/login', {
         method: 'POST',
         headers: {
@@ -38,6 +40,8 @@ function login(username, password) {
             } else {
                 onLoginSuccess(data);
             }
+        } else {
+            hideBigLoadingScreen();
         }
     });
 }
